@@ -393,6 +393,7 @@ public class JUC {//多线程
         System.out.println(Runtime.getRuntime().availableProcessors());//查看核数
     }
 
+<<<<<<< HEAD
     private  static void LockSupportDemo() {
         /**
          * LockSupport//  不需要锁块
@@ -416,6 +417,8 @@ public class JUC {//多线程
         b.start();
 
     }
+=======
+>>>>>>> 学习资料
 
     private static void NoLock_BlockingQueue() throws Exception {
         MyResource myResource=new MyResource(new ArrayBlockingQueue<>(10));

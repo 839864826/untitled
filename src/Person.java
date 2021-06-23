@@ -1,7 +1,10 @@
 
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> 学习资料
 public class Person {
     public String a=null;
     public Person(String abc) {

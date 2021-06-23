@@ -1,5 +1,9 @@
 package Juc;
 
+<<<<<<< HEAD
+=======
+import java.util.concurrent.locks.LockSupport;
+>>>>>>> 学习资料
 import java.util.concurrent.locks.ReentrantLock;
 
 public class AQS {
@@ -25,4 +29,32 @@ public class AQS {
         lock.unlock();
 
     }
+<<<<<<< HEAD
+=======
+    private  static void LockSupportDemo() {
+        /**
+         * LockSupport//  不需要锁块
+         * park()//阻塞队列        //wait()   和 await()     升级版   //
+         * unpark()//关闭阻塞队列   //notify() 和 signal()    升级版 //
+         *
+         * wait()一定在notify()前面执行
+         * unpark()可以在park()前执行   等于提前唤醒//native方法
+         * unpark()发放许可证 用一次+1 但是最大为一
+         * park()消耗许可证   为0消耗不了被堵塞  直到再发许可证
+         *
+         */
+
+        Thread a = new Thread(()->{
+            LockSupport.park();
+        },"a");
+        a.start();
+
+        Thread b = new Thread(()->{
+            LockSupport.unpark(a);
+        },"b");
+        b.start();
+
+    }
+
+>>>>>>> 学习资料
 }
