@@ -1,9 +1,6 @@
 package Juc;
 
-<<<<<<< HEAD
-=======
 import java.util.concurrent.locks.LockSupport;
->>>>>>> 学习资料
 import java.util.concurrent.locks.ReentrantLock;
 
 public class AQS {
@@ -29,8 +26,6 @@ public class AQS {
         lock.unlock();
 
     }
-<<<<<<< HEAD
-=======
     private  static void LockSupportDemo() {
         /**
          * LockSupport//  不需要锁块
@@ -56,5 +51,4 @@ public class AQS {
 
     }
 
->>>>>>> 学习资料
 }
