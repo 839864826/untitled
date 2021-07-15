@@ -1,6 +1,29 @@
 package Git;
 
-
+/**
+ * 日常命令
+ *
+ *
+ * [git clone XXx] //克隆一份代码到本地仓库
+ * [git pull] /把远程库的代码更新到工作台
+ * [git add] //把本地的修改加到stage中
+ * [git commit -m 'comments here' ] /把stage中的修改提交到本地库
+ * [git push ] /本地库的修改提交到远程库中
+ * [git checkout master/branch ] //切换到某个分支
+ * [git merge master] //假设当前在test分支上面， 把 master分支上的修改同步到test分支上
+ * [git push -f] //强制提交到远程分支(慎用)
+ *
+ *
+ * 分支切换及版本回退
+ * [git reset --hard xxx] //回退到某个版本
+ * [git log] //查看历史提交信息
+ * [git branch -r/-a] //查看远程分支/全部分支
+ * [git branch -d test //删除本地test分支
+ * [git checkout -b test] //新建本地est分支
+ * [git push origin -delete test] //删除远程分支
+ * [git push -u origin test ] //把本地test和远程test关联井推送
+ *
+ */
 public class gitDemo {
     public static void main(String[] args) {
         /**
