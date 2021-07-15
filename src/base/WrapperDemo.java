@@ -28,6 +28,12 @@ package base;
  * 使用Integer i=400这样的方法创建Integer对象与使用valueOf方法的效果是一样的,
  * 若要比较，使用compareTo或者equals方法是更好的
  */
+
+import java.util.AbstractMap;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
 /**
  * 包装类的使用
  * 强转   必须有字符类关系
@@ -43,7 +49,17 @@ public class WrapperDemo {
 
     public static void main(String[] args) {
 
-        String_int();
+        Order a=new Order();
+        Or b= new Or();
+        if(b instanceof Order){
+            System.out.println("b instanceof Order");
+        }
+        if(a instanceof Order){
+            System.out.println("a instanceof Order");
+        }
+        if(a instanceof Or){
+            System.out.println("a instanceof Or");
+        }
 
     }
 
@@ -55,6 +71,7 @@ public class WrapperDemo {
         str1 = String.valueOf(num1);//转换
         System.out.println(str1);
         String str2 = "123";
+        str1.equals(str2);
         int num2 = Integer.parseInt(str2);
         System.out.println(num2);
     }
@@ -79,4 +96,7 @@ public class WrapperDemo {
 class Order{
     boolean isMale;
     Boolean isFemale;
+}
+class Or extends Order{
+    int a=0;
 }

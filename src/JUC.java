@@ -980,6 +980,7 @@ public class JUC {//多线程
 
     private static void listNotsafe() {
 
+
         /**
          *
          * List<String> list=new ArrayList<>();
