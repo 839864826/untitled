@@ -24,6 +24,8 @@ public class 加载顺序 {
     }
 
     public static void main(String[] args) {
+
+
         System.out.println("起始点=========================");
         new AA();
         System.out.println("-----------------------");

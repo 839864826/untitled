@@ -31,6 +31,7 @@ public class HelloWorld {
 
 //        Integer
         int d;
+        Array02Demo();
 
     }
 

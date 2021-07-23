@@ -29,10 +29,8 @@ package base;
  * 若要比较，使用compareTo或者equals方法是更好的
  */
 
-import java.util.AbstractMap;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.io.UnsupportedEncodingException;
+import java.util.*;
 
 /**
  * 包装类的使用
@@ -49,6 +47,22 @@ public class WrapperDemo {
 
     public static void main(String[] args) {
 
+        System.out.println(Calendar.getInstance().getTimeInMillis());
+        System.out.println(System.currentTimeMillis());
+
+
+    }
+
+    private static void gatbydemo() {
+        String s1 = "你好";
+        try {
+            String s2 = new String(s1.getBytes("GB2312"), "ISO-8859-1");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+    }//将GB2312编码的字符串转换为ISO-8859-1编码的字符串
+
+    private static void instanceofDemo() {
         Order a=new Order();
         Or b= new Or();
         if(b instanceof Order){
@@ -60,8 +74,7 @@ public class WrapperDemo {
         if(a instanceof Or){
             System.out.println("a instanceof Or");
         }
-
-    }
+    }//instanceof关键字
 
     private static void String_int() {
         //String类型--- >基本数据类型、包装类:调用包装类的parseXxx ()

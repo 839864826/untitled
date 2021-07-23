@@ -1,4 +1,4 @@
-
+package linux;
 
 /**
  * sudo su//进入root权限  283036
@@ -62,14 +62,41 @@
  * cd 文件目录//进入
  * cd..//返回上一个目录
  * cd\//回到最开始目录
+ * cd -//切换到上一个工作目录
  * del 名字//删除
  * del 文件名//删除文件下的所有东西
  * del *.后缀名//删除全部
  * rd 文件名//删除空文件
+ * ls -S//根据文件大小排序
+ * ll//ls -l的简写别名显示的是目录下所有文件夹或目录的权限，所有者，大小，修改时间
+ * ls -a//显示包含隐藏文件在内的所有文件“  .”  表示隐藏文件
+ *
+ *
+ */
+
+/**
+ * 基础命令
+ * iptables
+ *
+ * netstat -tln | grep 8080//查看8080端口是否被占用
+ * netstat -anpt | grep 8080//查看8080端口占用情况
+ * kill -9 19979//终止19979进程     -9强制
+ * ssh -p xx user@ip//xx为端口号 user为用户名   ip为登录的ip
+ * ssh-keygen -t rsa//免密
+ *
+ * cat 文件名//查看文件
+ * move 文件名//一页一页查看
+ * sudo
  *
  */
 public class linuxDemo {
     public static void main(String[] args) {
-
+        /**
+         *
+         *
+         *
+         *
+         *
+         */
     }
 }
