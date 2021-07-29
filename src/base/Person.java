@@ -63,8 +63,14 @@ package base;
 
 public class Person {
 
+    public static void main(String[] args) {
 
+    }
+
+    //属性
     public String a=null;
+
+    //构造器
     public Person(String abc) {
         this.a=abc;
         //        默认有super()
@@ -74,6 +80,19 @@ public class Person {
 //        默认有super()
     }
 
+    //静态代码块
+    static {
+
+    }
+    //非静态代码块
+    {
+
+    }
+
+    //方法
+    public void eat(){
+        System.out.println("哈哈");
+    }
     public void setPersonName(String xxx) {
         this.a=xxx;
     }

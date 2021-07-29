@@ -32,7 +32,7 @@ package base;
  *
  *
  */
-public class 关键字 {
+public class StaticTest {
     public static void main(String[] args) {
         Chinese.nation="中国";//静态变量  只创建一个  可以直接  类.属性
         //方法同理
