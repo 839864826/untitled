@@ -26,7 +26,7 @@ class AA{
 
 public class 加载顺序 {
     {
-        System.out.println("BB构  造  块44444");
+        System.out.println("BB构  造  块44444");//非静态代码块
     }
     static {
         System.out.println("BB静态代码块55555:");

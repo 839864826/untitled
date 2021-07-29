@@ -55,7 +55,7 @@ public class FinalTest {
     }
 }
 
-/*final */class A{ //最终的   太监   无子类    不可以被继承
+/* final */class A{ //最终的   太监   无子类    不可以被继承
 
     public final void show(){
 
