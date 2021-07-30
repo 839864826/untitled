@@ -5,8 +5,7 @@ import java.io.*;
 import java.util.*;
 class Test {
 }
-public class blf
-{
+public class blf {
     public void as2(String str){
         str+="xxx";
     }
