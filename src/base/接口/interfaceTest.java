@@ -33,6 +33,8 @@ public class interfaceTest {
     public static void main(String[] args) {
         Pland pland = new Pland();
         pland.fly();
+        System.out.println("**********************");
+
     }
 }
 
@@ -83,6 +85,7 @@ abstract class Kite implements Flyable{
 
 class Bullet implements Flyable,Attackable{
 
+
     @Override
     public void fly() {
 
@@ -99,6 +102,41 @@ class Bullet implements Flyable,Attackable{
     }
 }
 
-interface AA{}
-interface BB{}
-interface CC extends AA,BB{}//接口可一多继承
+interface AA{
+    int x=0;// 省略了public static final
+    void play();
+     default void B1(){
+        System.out.println("B2");
+    }
+}
+interface BB{
+    void play();
+}
+
+interface CC extends AA,BB{
+
+}//接口可一多继承
+class B{
+    int x=1;
+    public static void B1(){
+        System.out.println("B1");
+    }
+}
+
+
+class C extends B implements CC{
+    public void PX(){
+        B1();//因为类优先于接口  输出B1
+        System.out.println(super.x);//super 父类
+        System.out.println(AA.x);// 省略了public static final  所以他是全局的
+//        System.out.println(x);// 不明确   不知道是B的还是AA的
+    }
+
+    public static void main(String[] args) {
+        new C().PX();
+    }
+
+    @Override
+    public void play() {
+    }
+}
