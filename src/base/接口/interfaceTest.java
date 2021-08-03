@@ -105,38 +105,83 @@ class Bullet implements Flyable,Attackable{
 interface AA{
     int x=0;// 省略了public static final
     void play();
-     default void B1(){
-        System.out.println("B2");
+    public default void B1(){
+        System.out.println("接口B2");
+    }
+    static void B2(){
+        System.out.println("接口BB2");
+    }
+    default void pl(){
+        System.out.println("接口plAA");
     }
 }
 interface BB{
     void play();
+    default void pl(){
+        System.out.println("接口plBB");
+    }
 }
 
 interface CC extends AA,BB{
+    default void pl(){
+        System.out.println("接口plCC");
 
+    }
 }//接口可一多继承
 class B{
     int x=1;
-    public static void B1(){
-        System.out.println("B1");
+    public  void B1(){
+        System.out.println("父类B1");
+    }
+    public static void B2(){
+        System.out.println("父类BB1");
+    }
+    public void pl(){
+        System.out.println("父类plB");
+
     }
 }
 
 
-class C extends B implements CC{
+class C extends B implements AA,BB{//CC{
     public void PX(){
-        B1();//因为类优先于接口  输出B1
+        //知识点3:如果子类(或实现类)继承的父类和实现的接口中声明了同名同参数的方法，
+        //那么子类在没有重写此方法的情况下，默认调用的是父类中的同名同参数的方法。-- >类优先原则
+        B1();//==super.B1();//因为类优先于接口  输出B1   相当于class中的B1  重写了接口的B1
+        //把类class B 中的B1删了  就输出接口中的B1
+
+        B2();//静态不可重写 class B 中的B2删了  报错↓
+        //知识点1:接口中定义的静态方法，只能通过接口来调用。
+        AA.B2();//静态不可重写         所以用 接口名.方法名
+
+        //知识点4:如果实现类实现了多个接口，而这多个接口中定义了同名同参数的默认方法，
+        //那么在实现类没有重写此方法的情况下，报错。-- >接口冲突。
+        //这就需要我们必须在实现类中重写此方法
+        pl();
+        super.pl();//父类
+        AA.super.pl();
+        BB.super.pl();
+
+
         System.out.println(super.x);//super 父类
         System.out.println(AA.x);// 省略了public static final  所以他是全局的
 //        System.out.println(x);// 不明确   不知道是B的还是AA的
+
     }
 
     public static void main(String[] args) {
         new C().PX();
     }
 
+
     @Override
     public void play() {
+        System.out.println("重写playC");
     }
+
+    @Override
+    public void pl() {
+        System.out.println("重写plC");
+    }
+
 }

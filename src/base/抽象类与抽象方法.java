@@ -9,6 +9,7 @@ package base;
  */
 public class 抽象类与抽象方法 {
     public static void main(String[] args) {
-
+        内部类 a=new 内部类();
+        WW ww=new WW();
     }
 }
