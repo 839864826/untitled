@@ -52,7 +52,7 @@ interface  Flyable{
     //Interface abstract methods cannot have body接口抽象方法不能有正文
 //    public  Flyable(){
 //
-//    }
+//    }不能有构造器
 
 
 } //接口 飞
@@ -76,6 +76,9 @@ class Pland implements Flyable{
 }
 
 abstract class Kite implements Flyable{
+
+    public Kite() {//抽象类可以有构造器  接口没
+    }
 
     @Override
     public void fly() {
@@ -106,10 +109,10 @@ interface AA{
     int x=0;// 省略了public static final
     void play();
     public default void B1(){
-        System.out.println("接口B2");
+        System.out.println("接口AA1");
     }
     static void B2(){
-        System.out.println("接口BB2");
+        System.out.println("接口AA2");
     }
     default void pl(){
         System.out.println("接口plAA");
@@ -147,8 +150,9 @@ class C extends B implements AA,BB{//CC{
     public void PX(){
         //知识点3:如果子类(或实现类)继承的父类和实现的接口中声明了同名同参数的方法，
         //那么子类在没有重写此方法的情况下，默认调用的是父类中的同名同参数的方法。-- >类优先原则
-        B1();//==super.B1();//因为类优先于接口  输出B1   相当于class中的B1  重写了接口的B1
+        B1();//==super.B1();//因为类优先于接口  输出父类B1   相当于class中的B1  重写了接口的B1
         //把类class B 中的B1删了  就输出接口中的B1
+        AA.super.B1();//接口AA1
 
         B2();//静态不可重写 class B 中的B2删了  报错↓
         //知识点1:接口中定义的静态方法，只能通过接口来调用。
