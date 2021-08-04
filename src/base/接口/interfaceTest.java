@@ -58,7 +58,7 @@ interface  Flyable{
 } //接口 飞
 
 interface Attackable{
-    void attack();//省略了public  abstract
+    public  abstract void attack();//省略了public  abstract
 }
 
 
