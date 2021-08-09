@@ -31,6 +31,8 @@ public class 内部类 {//一个Java文件只有主类可以用public修饰   �
     public static void main(String[] args) {
         WW.Dog dog=new WW.Dog();//静态成员内部类
         dog.show();
+        WW.Dog.gf();
+
 
         WW w=new WW();
         WW.Bird bird=w.new Bird();//非静态成员内部类
@@ -70,8 +72,11 @@ public class 内部类 {//一个Java文件只有主类可以用public修饰   �
     static class Dog{//可以static修饰内部类   按理说是不可以的
         String name;
         int age;
-        public void show(){
+        public  void show(){
             System.out.println("狗");
+        }
+        public static void gf(){
+            System.out.println("狗叫");
         }
     }
 

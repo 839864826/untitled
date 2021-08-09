@@ -2,9 +2,6 @@ package base.异常;
 
 /**
  *
- *
- *
- *
  * 异常:在Java语言中，将程序执行中发生的不正常情况称为“异常
  * (开发过程中的语法错误和逻辑错误不是异常)
  *
@@ -33,7 +30,6 @@ package base.异常;
  */
 public class Main {
     public static void main(String[] args) {
-        System.out.println(-5%1);
-    }
 
+    }
 }
