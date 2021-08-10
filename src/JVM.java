@@ -7,7 +7,10 @@ import java.lang.ref.SoftReference;
 import java.lang.ref.WeakReference;
 import java.nio.ByteBuffer;
 import java.util.*;
-//import net.sf.cglib.proxy.*;
+
+//每个线程，拥有自己独立的:栈、程序计数器
+//多个线程，共享同一个进程中的结构:方法区、堆。
+
 /**
  *  1.JVM系统架构图(Java Virtual Machine)
  *
@@ -92,6 +95,8 @@ import java.util.*;
  *                     3.方法区中常量引用的对象
  *                     4.本地方法栈JNI（Native方法）引用的对象
  *
+ * 并行:多个CPU同时执行多个任务。比如:多个人同时做不同的事。
+ * 并发:一个CPU (采用时间片)同时执行多个任务。比如:秒杀、多个人做同一件事|
  * 4种垃圾回收器
  *     1.Serial（串行）//它为单线程环境设计且只使用一个线程进行垃圾回收，会暂停所有的用户线程。所以不适合服务器环境
  *        -XX:+UseSerialGC
