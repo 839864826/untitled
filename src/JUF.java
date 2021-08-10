@@ -55,14 +55,6 @@ class MyTask extends RecursiveTask<Integer>
     }
 }//把大问题   分割成一堆小问题
 
-class Mythrend1 implements Runnable
-{
-    @Override
-    public void run()
-    {
-        System.out.println("****come in call method()");
-    }
-}
 
 class Mythrend2 implements Callable<Integer>
 {

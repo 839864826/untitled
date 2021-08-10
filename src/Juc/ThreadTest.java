@@ -1,15 +1,14 @@
 package Juc;
 
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.TagName;
 
 /**
- * 多线程的创建，方式- :继承于Thread类
+ * 多线程的创建，方式一 :继承于Thread类
  * 1.创建一个继承于Thread类的于类
  * 2.重写Thread 类的run()
  * 3.创建Thread类的子类的对象
  * 4.通过此对象调用start()
  */
-class OushuThread extends Thread{
+class OushuThread extends Thread{//继承类   Thread implements Runnable
     @Override
     public void run() {
         System.out.println(Thread.currentThread().getName() + " invoked...");

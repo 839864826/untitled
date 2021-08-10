@@ -20,8 +20,8 @@ package Juc;
  *      NORM_PRIORITY = 5//默认优先级
  *      MAX_PRIORITY = 10
  *2.如何获取和设置当前线程的优先级:
- * getPriority():获取线程的优先级
- * setPriority(int p): 设置线程的优先级
+ *      getPriority():获取线程的优先级
+ *      setPriority(int p): 设置线程的优先级
  *
  */
 public class ThreadMethodTest {
