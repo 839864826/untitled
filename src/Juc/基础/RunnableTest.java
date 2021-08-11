@@ -1,4 +1,4 @@
-package Juc;
+package Juc.基础;
 
 /**
  * 创建多线程的方式二：实现Runnable接口

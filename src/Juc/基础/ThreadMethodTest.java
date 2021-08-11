@@ -1,4 +1,4 @@
-package Juc;
+package Juc.基础;
 
 /**
  * Thread常用方法

@@ -68,32 +68,6 @@ class Mythrend2 implements Callable<Integer>
     }//只会执行一次
 }  //Callable<Integer>的高手有返回值
 
-
-class HoldLockThread implements Runnable
-{
-    private String lockA;
-    private String lockB;
-
-    public HoldLockThread(String lockA, String lockB) {
-        this.lockA = lockA;
-        this.lockB = lockB;
-    }
-
-    @Override
-    public void run()
-    {
-        synchronized (lockA){
-            System.out.println(Thread.currentThread().getName() + "\t自己持有" + lockA + "\t尝试获得" + lockB);
-            try{ TimeUnit.SECONDS.sleep(1);}catch (InterruptedException e){e.printStackTrace();}
-            synchronized (lockB){
-                System.out.println(Thread.currentThread().getName() + "\t自己持有" + lockB + "\t尝试获得" + lockA);
-
-            }
-        }
-    }
-}  //产生死锁
-
-
 /**
  *
  * Stream自己不会存储
@@ -110,22 +84,10 @@ public class JUF {
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
 
-        CallableDemo();
+
 
     }
 
-    private static void jps_jstack() {
-        /**
-         * jps -l查看java的线程
-         * jstack 11320（线程编号）   查看死锁原因
-         *
-         */
-        String lockA="lockA";
-        String lockB="lockB";
-
-        new Thread(new HoldLockThread(lockA,lockB),"ThreadAA").start();
-        new Thread(new HoldLockThread(lockB,lockA),"ThreadBB").start();
-    }  //死锁原因
 
     private static void CompletableFutureDemo() throws InterruptedException, ExecutionException {
         CompletableFuture<Void> completableFuture = CompletableFuture.runAsync(() -> {

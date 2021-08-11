@@ -48,7 +48,7 @@ class Bank{
     public static Bank getInstance(){
         return instance;
     }
-} //饿汉式
+} //饿汉式  线程安全
 
 class Banks{
 
@@ -63,4 +63,33 @@ class Banks{
         return instance;
     }
 
-} //懒汉式
+    public static synchronized Banks getInstance1() {//线程安全了
+        if(instance == null){
+            instance = new Banks();
+        }//synchronized
+        return instance;
+    }
+
+    public static  Banks getInstance2() {//线程安全了
+        synchronized (Banks.class){//效率低
+            if(instance == null){
+                instance = new Banks();
+            }//synchronized
+            return instance;
+
+        }
+    }//效率稍低  synchronized
+
+    public static  Banks getInstance3() {//线程安全了
+        if(instance == null){
+            synchronized (Banks.class){
+                if (instance == null){
+                    instance = new Banks();
+                }
+            }//效率稍高
+
+        }//synchronized
+        return instance;
+    } //效率稍高  synchronized
+
+} //懒汉式//线程不安全的
