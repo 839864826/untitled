@@ -1,13 +1,37 @@
 package NOWCODER;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
+
     public static void main(String[] args) {
+
+        partition("sss");
+
+
+
+
+
+
+
+
         int[][] graph ={{2,4}, {2},{0,1},{4},{3,0}};
         int[][] graph1 ={{1,2,3,4}, {0,3},{0},{0,1},{0}};
-        System.out.println(qqqqqq(graph1));
+//        System.out.println(qqqqqq(graph1));
+    }
+
+    private static List<List<String>> partition(String s) {
+        List<List<String>> list= new ArrayList<List<String>>();
+        List<String> list1= new ArrayList<>();
+
+        return list;
+    }
+
+    private static void dfs(String s,int index,List<List<String>> list,List<String> list1){
+
     }
 
     private static int  qqqqqq(int[][] graph) {

@@ -2,9 +2,24 @@ package Juc;
 
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+@FunctionalInterface
+interface  Foo {
+    //public void sayHello();
+    public int add(int x,int y);//函数式接口可用
 
-class Ticket//资源类      =实例+方法
-{
+    public default int mul(int x,int y)
+    {
+        return x+y;
+    }
+
+    public static int div(int x,int y)
+    {
+        return x/y;
+    }
+
+}
+
+class Ticket {
     private  int number = 30 ; //volatile  在不加锁的时候可保证唯一性
     Lock lock=new ReentrantLock();//可重入锁
     public void sale()//高内聚 资源类自带的方法     synchronized重锁   lock轻锁   //函数式接口可用
@@ -27,27 +42,13 @@ class Ticket//资源类      =实例+方法
 //            System.out.println(Thread.currentThread().getName()+"\t卖出第："+(number--)+"张票"+"还剩下："+number);
 //        }
 //    }
-}
 
-@FunctionalInterface
-interface  Foo
-{
-    //public void sayHello();
-    public int add(int x,int y);//函数式接口可用
-
-    public default int mul(int x,int y)
-    {
-        return x+y;
-    }
-
-    public static int div(int x,int y)
-    {
-        return x/y;
-    }
-
-}
+}//资源类      =实例+方法
 
 public class 卖票 {
+    public static void main(String[] args) {
+        lambda();
+    }
     private static void lambda() {
          /*
         Foo foo=new Foo() {

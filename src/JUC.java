@@ -764,7 +764,6 @@ public class JUC {//多线程
         System.out.println(Thread.currentThread().getName() + "关门");
     }//CountDownLatch 倒计时锁  控制线程 做完后在接下来运行
 
-
     private static void Lockgood_demo() {
         ShareData shareData=new ShareData();
         new Thread(()->{

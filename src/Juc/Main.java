@@ -56,8 +56,37 @@ package Juc;
  * ●若JVM中都是守护线程，当前JVM将退出。
  * ●形象理解:兔死狗烹，鸟尽弓藏
  */
+
 public class Main {
     public static void main(String[] args) {
 
+
     }
+
+    private static void 创建_就绪_阻塞_执行_死亡() {
+        //新建
+        Thread t=new Thread(()->{System.out.println(Thread.currentThread().getName());});
+
+        t.start();//就绪  会自动获取 cpu进入运行
+
+        t.yield();//失去cpu执行权 进入就绪
+
+        try {
+            t.sleep(1000);//  睡眠阻塞    睡眠时间一到进入就绪
+            //等待同步锁     获取同步锁
+            new Thread().join();//阻塞  执行这个新的线程直到执行完毕 当前线程进入就绪
+            t.suspend();//过时了   挂起   会出现死锁
+            t.resume();//过时了    结束    挂起   进入就绪
+
+            t.wait();//阻塞
+            t.notify();//通知t.wait   可以继续执行了  进入就绪
+//            t.notifyAll();//通知所有t.wait   可以继续执行了   进入就绪
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+
+        t.stop();//过时了 线程主动死亡   run自己运行完   出现异常不处理
+    }
+
 }
