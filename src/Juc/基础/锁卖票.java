@@ -21,10 +21,10 @@ interface  Foo {
 
 class Ticket {
     private  int number = 30 ; //volatile  在不加锁的时候可保证唯一性
-    Lock lock=new ReentrantLock();//可重入锁
+    Lock lock=new ReentrantLock(false);//可重入锁 //默认false枪锁非公平锁
     public void sale()//高内聚 资源类自带的方法     synchronized重锁   lock轻锁   //函数式接口可用
     {
-        lock.lock();
+        lock.lock();//加锁
         try{
             if(number>0){
                 System.out.println(Thread.currentThread().getName()+"\t卖出第："+(number--)+"张票"+"还剩下："+number);
@@ -32,7 +32,7 @@ class Ticket {
         }catch (Exception e){
             e.printStackTrace();
         }finally {
-            lock.unlock();
+            lock.unlock();//放锁
         }
     }
 
@@ -45,7 +45,7 @@ class Ticket {
 
 }//资源类      =实例+方法
 
-public class 卖票 {
+public class 锁卖票 {
     public static void main(String[] args) {
         lambda();
     }

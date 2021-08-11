@@ -72,150 +72,8 @@ class Phone2 implements Runnable
 
 }// //八锁的关系
 
-class Aircondtion// 轻锁和重锁ifandwhile_lockandsy
-{
-    private int number = 0;
-    //synchronized重锁1.8前
-    private Lock lock=new ReentrantLock();//ReentrantLock递归锁 非公平锁  新版的
-    private Condition condition=lock.newCondition();
-//    不能用synchronized的this.wait();和this.notifyAll()
-
-    public  void increment()throws Exception
-    {
-        lock.lock();
-        try{
-            //1.判断
-            while (number!=0){condition.await();}//if可能有虚假唤醒
-            //2.干活
-            number++;
-            System.out.println(Thread.currentThread().getName()+"\t"+number);
-            //3.通知
-        //this.notifyAll();//通知其他的this.wait(); 停止等待再次判断
-            condition.signalAll();
-        }catch (Exception e){
-            e.printStackTrace();
-        }finally {
-            lock.unlock();
-        }
-
-    }
-
-    public  void decrement()throws Exception
-    {
-        lock.lock();
-        try{
-            //1.判断
-            while (number==0){condition.await();}//if可能有虚假唤醒
-            //2.干活
-            number--;
-            System.out.println(Thread.currentThread().getName()+"\t"+number);
-            //3.通知
-//        this.notifyAll();//通知其他的this.wait(); 停止等待再次判断
-            condition.signalAll();
-        }catch (Exception e){
-            e.printStackTrace();
-        }finally {
-            lock.unlock();
-        }
-    }
 
 
-/*
-    public synchronized void increment()throws Exception
-    {
-        //1.判断
-        while (number!=0){this.wait();}//if可能有虚假唤醒
-        //2.干活
-        number++;
-        System.out.println(Thread.currentThread().getName()+"\t"+number);
-        //3.通知
-        this.notifyAll();//通知其他的this.wait(); 停止等待再次判断
-    }
-
-    public synchronized void decrement()throws Exception
-    {
-        //1.判断
-        while (number==0){this.wait();}//if可能有虚假唤醒
-        //2.干活
-        number--;
-        System.out.println(Thread.currentThread().getName()+"\t"+number);
-        //3.通知
-        this.notifyAll();//通知其他的this.wait(); 停止等待再次判断
-    }
-
- */
-
-}
-
-class ShareData//为何用Lock   Lock可以设置多把锁和多把钥匙 可以定向唤醒  Lockgood_demo
-{
-    private int number = 1;//a:1  b:2  c:3
-    //synchronized重锁1.8前
-    private Lock lock=new ReentrantLock();//ReentrantLock递归锁 非公平锁  新版的
-    private Condition c1=lock.newCondition();//多把钥匙   多吧锁
-    private Condition c2=lock.newCondition();
-    private Condition c3=lock.newCondition();
-    public  void printc1()throws Exception
-    {
-        lock.lock();
-        try{
-            //1.判断
-            while (number!=1){c1.await();}//if可能有虚假唤醒
-            //2.干活
-            for (int i = 0; i < 1; i++) {
-                System.out.println(Thread.currentThread().getName()+"\t"+i);
-            }
-            //3.通知
-            number=2;
-            c2.signalAll();
-        }catch (Exception e){
-            e.printStackTrace();
-        }finally {
-            lock.unlock();
-        }
-
-    }
-    public  void printc2()throws Exception
-    {
-        lock.lock();
-        try{
-            //1.判断
-            while (number!=2){c2.await();}//if可能有虚假唤醒
-            //2.干活
-            for (int i = 0; i < 2; i++) {
-                System.out.println(Thread.currentThread().getName()+"\t"+i);
-            }
-            //3.通知
-            number=3;
-            c3.signalAll();
-        }catch (Exception e){
-            e.printStackTrace();
-        }finally {
-            lock.unlock();
-        }
-    }
-    public  void printc3()throws Exception
-    {
-        lock.lock();
-        try{
-            //1.判断
-            while (number!=3){c3.await();}//if可能有虚假唤醒
-            //2.干活
-            for (int i = 0; i < 3; i++) {
-                System.out.println(Thread.currentThread().getName()+"\t"+i);
-            }
-            //3.通知
-            number=1;
-            c1.signalAll();
-        }catch (Exception e){
-            e.printStackTrace();
-        }finally {
-            lock.unlock();
-        }
-    }
-
-
-}
 
 class ReadWriteDemo  //把写锁了  写完  在读
 {
@@ -251,53 +109,6 @@ class ReadWriteDemo  //把写锁了  写完  在读
     }
 }
 
-class  MyResource{
-    private volatile boolean FLAG = true;//默认开启，进行生产消费
-    private AtomicInteger atomicInteger=new AtomicInteger();
-    BlockingQueue<String> blockingQueue=null;
-
-    public MyResource(BlockingQueue<String> blockingQueue) {
-        this.blockingQueue = blockingQueue;
-        System.out.println(blockingQueue.getClass().getName());
-    }
-
-    public void myProd()throws Exception{
-        String data=null;
-        boolean retValue;
-        while (FLAG){
-            data=atomicInteger.incrementAndGet()+"";
-            retValue=blockingQueue.offer(data,2L,TimeUnit.SECONDS);
-            if(retValue){
-                System.out.println(Thread.currentThread().getName() + "\t插入队列" + data + "成功");
-            }else{
-                System.out.println(Thread.currentThread().getName() + "\t插入队列" + data + "失败");
-            }
-//            TimeUnit.SECONDS.sleep(1);
-        }
-        System.out.println(Thread.currentThread().getName() + "\t大老板叫停 表示FLAG=false");
-
-    }
-
-    public void myConsumer()throws Exception{
-        String result=null;
-        while (FLAG){
-            result=blockingQueue.poll(2L,TimeUnit.SECONDS);
-            if(null==result||result.equalsIgnoreCase("")){
-                FLAG=false;
-                System.out.println();
-                System.out.println();
-                System.out.println(Thread.currentThread().getName() + "\t超时2秒没取到推出");
-                return;
-            }
-            System.out.println(Thread.currentThread().getName() + "\t消费队列" + result + "成功");
-
-        }
-    }
-
-    public void stop()throws Exception{
-        this.FLAG=false;
-    }
-}  //不用lock  生产者消费者
 
 /**
  * //多线程
@@ -376,35 +187,6 @@ public class JUC {//多线程
 
     }
 
-    private static void NoLock_BlockingQueue() throws Exception {
-        MyResource myResource=new MyResource(new ArrayBlockingQueue<>(10));
-        new Thread(()->{
-            System.out.println(Thread.currentThread().getName() + "\t生产线启动");
-            try {
-                myResource.myProd();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        },"生产").start();
-        new Thread(()->{
-            System.out.println(Thread.currentThread().getName() + "\t消费线启动");
-
-            try {
-                myResource.myConsumer();
-                System.out.println();System.out.println();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        },"消费").start();
-        TimeUnit.MILLISECONDS.sleep(2);
-//        TimeUnit.SECONDS.sleep(1);
-//        TimeUnit.SECONDS.sleep(5);
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        System.out.println("5秒教廷");
-        myResource.stop();
-    }  //不用lock  生产者消费者
 
     public enum CountryEnum{
         ONE(1,"齐国"), TWO(2,"楚国"),
@@ -430,42 +212,7 @@ public class JUC {//多线程
         }
     }  //枚举
 
-    AtomicReference<Thread> atomicReference=new AtomicReference<>();//原子引用线程
-    public void myLock(){
-        Thread thread=Thread.currentThread();
-        System.out.println(Thread.currentThread().getName() + "\t O(∩_∩)O");
-        while (!atomicReference.compareAndSet(null,thread))
-        {
-            /**
-             * 自旋锁不会阻塞，而是采用循环的方式尝试获得锁
-             */
-        }
-    }
-    public void myUnlock(){
-        Thread thread=Thread.currentThread();
-        atomicReference.compareAndSet(thread,null);
-        System.out.println(Thread.currentThread().getName() + "\tmyUnlock");
-    }
-    private static void 自旋锁() {
-        /**
-         * 自旋锁不会阻塞，而是采用循环的方式尝试获得锁
-         */
 
-        JUC juc=new JUC();
-        new Thread(()->{
-            juc.myLock();
-            try {TimeUnit.SECONDS.sleep(2);} catch (InterruptedException e) {e.printStackTrace(); }
-            juc.myUnlock();
-        },"AA").start();
-
-        try {TimeUnit.SECONDS.sleep(1);} catch (InterruptedException e) {e.printStackTrace(); }
-
-        new Thread(()->{
-            juc.myLock();
-            try {TimeUnit.SECONDS.sleep(1);} catch (InterruptedException e) {e.printStackTrace(); }
-            juc.myUnlock();
-        },"BB").start();
-    }
 
     private static void 可重入锁() {
         /**
@@ -764,78 +511,6 @@ public class JUC {//多线程
         System.out.println(Thread.currentThread().getName() + "关门");
     }//CountDownLatch 倒计时锁  控制线程 做完后在接下来运行
 
-    private static void Lockgood_demo() {
-        ShareData shareData=new ShareData();
-        new Thread(()->{
-            for (int i = 0; i < 5; i++) {
-                try {
-                    shareData.printc1();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        },"A").start();
-        new Thread(()->{
-            for (int i = 0; i < 5; i++) {
-                try {
-                    shareData.printc2();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        },"B").start();
-        new Thread(()->{
-            for (int i = 0; i < 5; i++) {
-                try {
-                    shareData.printc3();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        },"C").start();
-    }   //精确唤醒某些线程  private Condition c1=lock.newCondition();//多把钥匙   多吧锁
-
-    private static void ifandwhile_lockandsy() {
-        Aircondtion aircondtion=new Aircondtion();
-
-        new Thread(()->{
-            for (int i = 0; i < 10; i++) {
-                try {
-                    aircondtion.increment();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        },"a").start();
-        new Thread(()->{
-            for (int i = 0; i < 10; i++) {
-                try {
-                    aircondtion.decrement();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        },"b").start();
-        new Thread(()->{
-            for (int i = 0; i < 10; i++) {
-                try {
-                    aircondtion.increment();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        },"c").start();
-        new Thread(()->{
-            for (int i = 0; i < 10; i++) {
-                try {
-                    aircondtion.decrement();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        },"d").start();
-
-    }   //if和while之间多线程要用while
 
     private static void lockeitht() {
         Phone phone=new Phone();
