@@ -14,8 +14,7 @@ class ShareData//为何用Lock   Lock可以设置多把锁和多把钥匙 可以
     private Condition c1=lock.newCondition();//多把钥匙   多吧锁
     private Condition c2=lock.newCondition();
     private Condition c3=lock.newCondition();
-    public  void printc1()throws Exception
-    {
+    public  void printc1() {
         lock.lock();
         try{
             //1.判断
@@ -34,8 +33,7 @@ class ShareData//为何用Lock   Lock可以设置多把锁和多把钥匙 可以
         }
 
     }
-    public  void printc2()throws Exception
-    {
+    public  void printc2() {
         lock.lock();
         try{
             //1.判断
@@ -53,8 +51,7 @@ class ShareData//为何用Lock   Lock可以设置多把锁和多把钥匙 可以
             lock.unlock();
         }
     }
-    public  void printc3()throws Exception
-    {
+    public  void printc3() {
         lock.lock();
         try{
             //1.判断
@@ -76,16 +73,14 @@ class ShareData//为何用Lock   Lock可以设置多把锁和多把钥匙 可以
 
 }
 
-class Aircondtion// 轻锁和重锁ifandwhile_lockandsy
-{
+class Aircondtion {
     private int number = 0;
     //synchronized重锁1.8前
     private Lock lock=new ReentrantLock();//ReentrantLock递归锁 非公平锁  新版的
     private Condition condition=lock.newCondition();
 //    不能用synchronized的this.wait();和this.notifyAll()
 
-    public  void increment()throws Exception
-    {
+    public  void increment(){
         lock.lock();
         try{
             //1.判断
@@ -104,8 +99,7 @@ class Aircondtion// 轻锁和重锁ifandwhile_lockandsy
 
     }
 
-    public  void decrement()throws Exception
-    {
+    public  void decrement() {
         lock.lock();
         try{
             //1.判断
@@ -149,7 +143,8 @@ class Aircondtion// 轻锁和重锁ifandwhile_lockandsy
 
  */
 
-}
+} // 轻锁和重锁ifandwhile_lockandsy
+
 /**
  * //多线程
  * JUC :java.util.concurrent（并发）   .atomic（原子）    .locks(锁)
@@ -168,12 +163,26 @@ class Aircondtion// 轻锁和重锁ifandwhile_lockandsy
  *  用Condition 可精准唤醒
  *
  */
+
+/**
+ * 解决线程安全问题的方式三: Lock锁--- JDK5.0新增
+ * 1. 面试题: synchronized 与Lock的异同?
+ * 相同:二者都可以解决线程安全问题
+ * 不同: synchronized机制在执行完相应的同步代码以后，自动的释放同步监视器
+ * Lock需要手动的启动同步(Lock()) ，同时结束同步也需要手动的实现(unlock())
+ *
+ * 使用Lock锁，JVM将花费较少的时间来调度线程，性能更好。并且具有更好的扩展性(提供更多的子类)
+ *
+ * *说明:
+ * * 1.wait()， notify(), notifyALl()三个方法必须使用在同步代码块或同步方法中。
+ * 2. wait(), notify(), notifyALl()三个方法的调用者必须是同步代码块或同步方法中的同步监视器
+ * 否则，会出现IlLegaLMonitorStateException异常
+ */
 public class LockAndsynchronized {
 
     public static void main(String[] args) {
-
+        ifandwhile_lockandsy();
     }
-
 
 
     private static void Lockgood_demo() {

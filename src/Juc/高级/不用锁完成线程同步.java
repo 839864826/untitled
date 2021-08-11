@@ -54,6 +54,7 @@ class  MyResource{
         this.FLAG=false;
     }
 }  //不用lock  生产者消费者
+
 public class 不用锁完成线程同步 {
 
     public static void main(String[] args) {

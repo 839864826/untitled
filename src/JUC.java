@@ -212,8 +212,6 @@ public class JUC {//多线程
         }
     }  //枚举
 
-
-
     private static void 可重入锁() {
         /**
          *    synchronized和ReentrantLock  可重入锁又名递归锁
@@ -510,7 +508,6 @@ public class JUC {//多线程
         countDownLatch.await();//没结束等待
         System.out.println(Thread.currentThread().getName() + "关门");
     }//CountDownLatch 倒计时锁  控制线程 做完后在接下来运行
-
 
     private static void lockeitht() {
         Phone phone=new Phone();
