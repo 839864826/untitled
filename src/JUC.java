@@ -72,9 +72,6 @@ class Phone2 implements Runnable
 
 }// //八锁的关系
 
-
-
-
 class ReadWriteDemo  //把写锁了  写完  在读
 {
     private volatile Map<String,Object> map=new HashMap<>();

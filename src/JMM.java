@@ -58,7 +58,7 @@ public class JMM {    //java内存模型  //主类
     public static void main(String[] args) {
 
 
-        AtomicStampedReference_ABA();
+        AtomDemo();
     }
 
     private static void AtomicStampedReference_ABA() {
@@ -126,7 +126,6 @@ public class JMM {    //java内存模型  //主类
     private static volatile JMM instance = null; //加volatile禁止指令重排
     private JMM() {
         System.out.println(Thread.currentThread().getName() + "\t我是构造方法");
-
     }
     public static JMM getInstance() {
         if(instance == null){

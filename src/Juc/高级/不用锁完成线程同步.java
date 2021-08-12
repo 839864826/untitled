@@ -58,7 +58,7 @@ class  MyResource{
 public class 不用锁完成线程同步 {
 
     public static void main(String[] args) {
-
+        NoLock_BlockingQueue();
     }
     AtomicReference<Thread> atomicReference=new AtomicReference<>();//原子引用线程
     public void myLock(){
@@ -98,7 +98,7 @@ public class 不用锁完成线程同步 {
         },"BB").start();
     }
 
-    private static void NoLock_BlockingQueue() throws Exception {
+    private static void NoLock_BlockingQueue()  {
         MyResource myResource=new MyResource(new ArrayBlockingQueue<>(10));
         new Thread(()->{
             System.out.println(Thread.currentThread().getName() + "\t生产线启动");
@@ -118,14 +118,22 @@ public class 不用锁完成线程同步 {
                 e.printStackTrace();
             }
         },"消费").start();
-        TimeUnit.MILLISECONDS.sleep(2);
+        try {
+            TimeUnit.MILLISECONDS.sleep(2);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 //        TimeUnit.SECONDS.sleep(1);
 //        TimeUnit.SECONDS.sleep(5);
         System.out.println();
         System.out.println();
         System.out.println();
         System.out.println("5秒教廷");
-        myResource.stop();
+        try {
+            myResource.stop();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }  //不用lock  生产者消费者
 
 }

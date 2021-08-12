@@ -80,7 +80,7 @@ class Aircondtion {
     private Condition condition=lock.newCondition();
 //    不能用synchronized的this.wait();和this.notifyAll()
 
-    public  void increment(){
+    public  void increment() {
         lock.lock();
         try{
             //1.判断
@@ -173,19 +173,46 @@ class Aircondtion {
  *
  * 使用Lock锁，JVM将花费较少的时间来调度线程，性能更好。并且具有更好的扩展性(提供更多的子类)
  *
- * *说明:
- * * 1.wait()， notify(), notifyALl()三个方法必须使用在同步代码块或同步方法中。
- * 2. wait(), notify(), notifyALl()三个方法的调用者必须是同步代码块或同步方法中的同步监视器
- * 否则，会出现IlLegaLMonitorStateException异常
  */
+
+/** synchronized涉及到的三个方法:
+ * wait():一旦执行此方法，当前线程就进入阻塞状态，并释放同步监视器。
+ * notify():一旦执行此方法，就会唤醒被wait的一个线程。如果有多个线程被wait,就唤醒优先级高
+ * notifyAll():一旦执行此方法，就会唤醒所有被wait的线程。
+ * 说明:
+ * 1. wait(), notify(), notifyALl()三个方法必须使用在同步代码块或同步方法中。
+ * 2. wait(), notify(), notifyAll()三个方法的调用者必须是同步代码块或同步方法中的同步监视器
+ * 否则，会出现IllegalMonitorStateException异 常
+ * 3. wait(), notify(), notifyALL()三个方法是定义在java.lang.object类中。
+ *
+ *   sleep()和wait()异同
+ *      相同：都可以使当前线程进入阻塞状态。
+ *      不同点：  1)两个方法声明的位置不同: Thread类 中声明sleep()，object类中声 明wait()
+ *              2)调用的范围不同:sleep()可以在任何地方掉     wait()在能在同步代码块或同步方法
+ *              3)sleep()不释放锁   wait()会释放锁
+ *
+ */
+
+/**
+ * Lock lock=new ReentrantLock(); Condition condition=lock.newCondition();
+ * Lock
+ * condition.await();
+ * condition.signal();
+ * condition.signalAll();
+ * 和wait(), notify(), notifyALl() 功能差不多
+ *    区别    notify唤醒
+ *          signal唤醒某一把锁
+ *
+ */
+
 public class LockAndsynchronized {
 
     public static void main(String[] args) {
-        ifandwhile_lockandsy();
+        Lockgood_demo();
     }
 
 
-    private static void Lockgood_demo() {
+    private static  void Lockgood_demo() {
         ShareData shareData=new ShareData();
         new Thread(()->{
             for (int i = 0; i < 5; i++) {

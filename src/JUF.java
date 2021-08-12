@@ -17,15 +17,13 @@ import java.util.stream.Collectors;
 @Accessors(chain = true)
 @NoArgsConstructor
 @AllArgsConstructor
-class User
-{
+class User {
     private Integer id;
     private String  username;
     private int     age;
 }
 
-class MyTask extends RecursiveTask<Integer>
-{
+class MyTask extends RecursiveTask<Integer> {
 
     public static final Integer ADJUST_VALUE = 10;
     private  int begin;
@@ -56,17 +54,6 @@ class MyTask extends RecursiveTask<Integer>
 }//把大问题   分割成一堆小问题
 
 
-class Mythrend2 implements Callable<Integer>
-{
-    AtomicInteger atomicInteger=new AtomicInteger(10);//原子性的int
-    @Override
-    public Integer call() throws Exception//会抛异常
-    {
-        System.out.println("****come in call method()");
-        TimeUnit.SECONDS.sleep(1);
-        return 1024;
-    }//只会执行一次
-}  //Callable<Integer>的高手有返回值
 
 /**
  *
@@ -121,57 +108,7 @@ public class JUF {
     }
     //分支合并框架
 
-    private static void CallableDemo() throws InterruptedException, ExecutionException {
-        /**
-         * 第二种  多线程  有返回值！！！！   只能在一个线程跑   要摸在new另一个
-         *class Mythrend2 implements Callable<Integer>
-         * {
-         *     @Override
-         *     public Integer call() throws Exception
-         *     {
-         *         System.out.println("****come in call method()");
-         *         return 1024;
-         *     }
-         * }
-         *
-         */
 
-        /*
-        FutureTask<Integer> futureTask1 = new FutureTask(new Mythrend2());//只能执行一次
-        FutureTask<Integer> futureTask2 = new FutureTask(new Mythrend2());
-
-        new Thread(futureTask1,"A").start();
-        new Thread(futureTask1,"B").start();
-        new Thread(futureTask2,"C").start();
-
-
-        System.out.println(Thread.currentThread().getName()+"计算完毕");
-        Integer result =futureTask1.get();
-        System.out.println(result);
-        Integer result2 =futureTask2.get();
-        System.out.println(result2);
-
-
-         */
-
-        FutureTask<Integer> futureTask0 = new FutureTask(new Mythrend2());
-
-        new Thread(futureTask0,"0").start();
-        new Thread(futureTask0,"1").start();
-
-        System.out.println(Thread.currentThread().getName() + "**************************");
-        int a=100;
-
-        while (!futureTask0.isDone())//是否结束
-        {
-
-        }
-        int aa=futureTask0.get();
-        System.out.println("*****result" + (a + aa));
-
-
-    }
-    //Callable<Integer>  的调用   另一种多线程
 
     private static void Streamlanmuda() {
 
@@ -225,11 +162,6 @@ public class JUF {
         Supplier<String> supplier=()->{return "你猜";}; //供给型接口
         System.out.println(supplier.get());
 
-    }  //四大函数式接口
+    }  //四大函数式接口  juf
 
-}
-interface Myinterface
-{
-    public int myInt(int x);
-    public String myString (String s);
 }
