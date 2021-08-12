@@ -16,7 +16,7 @@ class OushuThread1 extends Thread{//继承类   Thread implements Runnable
     @Override
     public void run() {
         while (true){
-//            synchronized (this){
+//            synchronized (this){//慎用 因为每个线程都要new一个  所以每个this不是一个
             synchronized (ThreadTest.class){//类也是对象   类只加载一次  所以唯一
 //            synchronized (obj){
                 if(a>0){
@@ -38,6 +38,14 @@ class OushuThread3 extends Thread{//继承类   Thread implements Runnable
         }
     }
 
+    /**
+     * 关于同步方法的总结:
+     * 1.同步方法仍然涉及到同步监视器，只是不需要我们显式的声明。
+     * 2.非静态的同步方法，同步监视器是: this
+     *      静态的同步方法，同步监视器是:当前类本身
+     *      static synchronized (同步监视器){
+     *       }
+     */
     //synchronized  没static相当于synchronized (this){
     //有的话static synchronized  相当于synchronized (RunnableTest.class){
     private static synchronized boolean show(){//由于extends Thread  要创建多个对象 所以static

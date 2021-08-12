@@ -6,6 +6,16 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+/**
+ * 关于同步方法的总结:
+ * 1.同步方法仍然涉及到同步监视器，只是不需要我们显式的声明。
+ * 2.非静态的同步方法，同步监视器是: this
+ *      静态的同步方法，同步监视器是:当前类本身
+ *
+ *      static synchronized (同步监视器){
+ *       }
+ */
+
 class ShareData//为何用Lock   Lock可以设置多把锁和多把钥匙 可以定向唤醒  Lockgood_demo
 {
     private int number = 1;//a:1  b:2  c:3
@@ -209,6 +219,7 @@ public class LockAndsynchronized {
 
     public static void main(String[] args) {
         Lockgood_demo();
+
     }
 
 

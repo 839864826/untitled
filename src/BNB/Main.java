@@ -12,7 +12,7 @@ public class Main {
 
     private static void appendDemo() {
         String str1=new StringBuilder("j").append("ava").toString();
-        System.out.println(str1 == str1.intern());//除了java都是thue
+        System.out.println(str1 == str1.intern());//除了java都是true
         String str2=new StringBuilder("jee").append("ava").toString();
         System.out.println(str2 == str2.intern());
     }

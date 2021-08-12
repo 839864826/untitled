@@ -23,7 +23,7 @@ class MyCallable2 implements Callable<Integer> {
  *      2.V     有返回值
  *      3.需要FutureTask这个中间商  再new Thread（FutureTask只能执行一次）
  * Runnable
- *      1.每异常       public abstract void run();
+ *      1.没异常       public abstract void run();
  *      2.void  无返回值
  *      3.直接可以  new Thread
  */

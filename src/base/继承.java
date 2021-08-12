@@ -34,5 +34,5 @@ package base;
  *    3. 意味着，所有的java类具有java.lang.Object类声明的功能。
  */
 //public class jichangdemo {
-public class jichangdemo  extends Object{
+public class 继承 extends Object{
 }
