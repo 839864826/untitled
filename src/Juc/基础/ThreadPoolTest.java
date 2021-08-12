@@ -16,6 +16,7 @@ import java.util.concurrent.*;
 public class ThreadPoolTest {
     public static void main(String[] args) {
 
+        ewFixedThreadPool_demo();
     }
 
     private static void ewFixedThreadPool_demo() {
@@ -80,8 +81,8 @@ public class ThreadPoolTest {
 
 
         ExecutorService threadPool= new ThreadPoolExecutor(
-                2,
-                5,
+                2,//核心线程数 == 固定线程数
+                5,//最大线程数
 
                 /**
                  * 1、对于CPU密集型，也就是代码大部分操作都是CPU去执行计算处理的，
@@ -96,12 +97,14 @@ public class ThreadPoolTest {
                  *
                  */
 
-                2L,
-                TimeUnit.SECONDS,
-                new LinkedBlockingDeque<>(3),
-                Executors.defaultThreadFactory(),
-                new ThreadPoolExecutor.CallerRunsPolicy()
+                2L,//线程存活时间
+                TimeUnit.SECONDS,//时间单位
+                new LinkedBlockingDeque<>(3), //阻塞队列
+                Executors.defaultThreadFactory(),//表示生成线程池中工作线程的线程工厂  用于创建线程  一般默认
+                new ThreadPoolExecutor.CallerRunsPolicy()//拒绝策略  当阻塞队列满了  工作线程大于等于最大线程数时触发
         );
+
+
 
                 /*
                     new ThreadPoolExecutor.DiscardPolicy()//抛弃执行不了的
@@ -113,6 +116,14 @@ public class ThreadPoolTest {
         //java.util.concurrent.RejectedExecutionException   太多了  最多maximumPoolSize+queue
         //                      拒绝执行
 
+//        threadPool.execute(new MyRunnable3());//适用于Runnable
+//        threadPool.submit(new MyCallable2());//适用于Callable
+        //不用一个一个new Thread()了   直接放在threadPool里  他给你new Thread
+
+
+//        ThreadPoolExecutor threadPoolExecutor= (ThreadPoolExecutor) threadPool;//强转一下   就可以用一些函数了
+//        System.out.println(threadPoolExecutor.getPoolSize());//当前使用线程数
+//        System.out.println(threadPoolExecutor.getCorePoolSize());//当前已有线程
         try{
             for (int i = 0; i < 10; i++) {
                 final int k=i+1;
@@ -121,10 +132,11 @@ public class ThreadPoolTest {
                 });
                 //做完了  腾出位置 可以在做
             }
+
         }catch (Exception e){
             e.printStackTrace();
         }finally {
-            threadPool.shutdown();
+            threadPool.shutdown();//关闭线程池
         }
     }  //线程池   nTreads  几个线程  固定  线程  池
 

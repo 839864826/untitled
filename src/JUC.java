@@ -96,9 +96,9 @@ public class JUC {//多线程
     private String userName;
     private  int age;
 
-    public  static  void main(String[] args) throws Exception {//main线程   一切程序入口
+    public  static  void main(String[] args) {//main线程   一切程序入口
 
-        //System.out.println(Runtime.getRuntime().availableProcessors());//查看核数
+//        System.out.println(Runtime.getRuntime().availableProcessors());//查看核数
     }
 
     private static void AQSTest() {
@@ -255,7 +255,7 @@ public class JUC {//多线程
         }
     } //CyclicBarrier  控制线程 做完后在接下来运行(必须做完才结束)
 
-    private static void CountDownLatchDemo() throws InterruptedException {
+    private static void CountDownLatchDemo() {
         //      倒计时锁  计数  向下 门闩
         CountDownLatch countDownLatch=new CountDownLatch(6);//6次结束
         for (int i = 0; i < 6; i++) {
@@ -264,7 +264,11 @@ public class JUC {//多线程
                 countDownLatch.countDown();//每做一次记录一次
             },CountryEnum.forEach_CountryEnum(i+1).getRetMessage()).start();//String.valueOf(i+1)
         }     //           枚举
-        countDownLatch.await();//没结束等待
+        try {
+            countDownLatch.await();//没结束等待
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         System.out.println(Thread.currentThread().getName() + "关门");
     }//CountDownLatch 倒计时锁  控制线程 做完后在接下来运行
 

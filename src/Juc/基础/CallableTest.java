@@ -6,7 +6,7 @@ import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 //JDK  5.0新增
-class Mythrend2 implements Callable<Integer> {
+class MyCallable2 implements Callable<Integer> {
     AtomicInteger atomicInteger=new AtomicInteger(10);//原子性的int
     @Override
     public Integer call() {
@@ -37,8 +37,8 @@ public class CallableTest {
         // 一个对象只能执行一次  等于说👇
         // 只能在一个线程跑   要摸在new另一个继承Callable的对象
 
-        FutureTask<Integer> futureTask1 = new FutureTask(new Mythrend2());//只能执行一次
-        FutureTask<Integer> futureTask2 = new FutureTask(new Mythrend2());//FutureTask只能执行一次
+        FutureTask<Integer> futureTask1 = new FutureTask(new MyCallable2());//只能执行一次
+        FutureTask<Integer> futureTask2 = new FutureTask(new MyCallable2());//FutureTask只能执行一次
 
         new Thread(futureTask1,"A").start();
         new Thread(futureTask1,"B").start();//由于线程A执行过了  一个new Callable只能执行一次
@@ -53,7 +53,7 @@ public class CallableTest {
         System.out.println("*************************************************");
 
 
-        FutureTask<Integer> futureTask0 = new FutureTask(new Mythrend2());
+        FutureTask<Integer> futureTask0 = new FutureTask(new MyCallable2());
 
         new Thread(futureTask0,"0").start();
         new Thread(futureTask0,"1").start();//只执行一个
