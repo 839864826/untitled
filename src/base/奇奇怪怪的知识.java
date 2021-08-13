@@ -5,6 +5,8 @@ public class 奇奇怪怪的知识 {
     public static final String b;
     public static final String aa="123";
     public static final String bb="456";
+    public static  String aaa="123";
+    public static  String bbb="456";
 
     static {
         a = "123";
@@ -42,9 +44,12 @@ public class 奇奇怪怪的知识 {
     {
         String c = "123456";
         String d = a + b;
-        System.out.println(c == d);//false
+        System.out.println((c == d)+"\t"+d);//false	123456
 
         String e=aa+bb;
-        System.out.println(c == e);//true
+        System.out.println((c == e)+"\t"+e);//true	123456
+
+        String f=aaa+bbb;
+        System.out.println((c == f)+"\t"+f);//false	123456
     }
 }
