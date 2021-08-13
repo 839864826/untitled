@@ -33,7 +33,6 @@ class defaults{
         //详情  见接口的 interfaceTest
         Java8 jk=new JK();
 
-
         //知识点1:接口中定义的静态方法，只能通过接口来调用。
         Java8.method1();
 

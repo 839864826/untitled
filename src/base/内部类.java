@@ -35,8 +35,12 @@ public class 内部类 {//一个Java文件只有主类可以用public修饰   �
 
 
         WW w=new WW();
+        w.eat();
         WW.Bird bird=w.new Bird();//非静态成员内部类
         bird.sing();
+
+        WW ww=new WW();
+        ww.ZZ();
     }
 }
  class WW{
@@ -57,15 +61,15 @@ public class 内部类 {//一个Java文件只有主类可以用public修饰   �
 //            System.out.println("Bird");
         }
         public void sing(){
-            WW.this.name="WW名字2";
-            System.out.println(name+"鸟唱歌");
-            eat();//等同于↓
+            WW.this.name="WW名字2";//WW名字
+            System.out.println(name+"鸟唱歌");//Bird名字
+            eat(name);//本类没有同名的话等同于↓
             WW.this.eat();
         }//调用外部类的结构
-        public void display(String name){
+        public void eat(String name){
             System.out.println(name);//方法的形参
-            System.out.println(this.name);//内部类属性
-            System.out.println(WW.this.name);//外部类属性
+            System.out.println(this.name);//内部类属性    Bird名字
+            System.out.println(WW.this.name);//外部类属性  WW名字
         }
     }
     //静态成员内部类
