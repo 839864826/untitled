@@ -10,7 +10,6 @@ package base.常用类;
  */
 public class StringBufferBuilderTest {
     public static void main(String[] args) {
-
         执行时间();
     }
 

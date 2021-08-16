@@ -7,8 +7,8 @@ package base.常用类;
  * ●String是一个final类，代表不可变的字符序列。不可被继承
  * ●字符串是常量，用双引号引起来表示。它们的值在创建之后不能更改。
  * ●String对象的字符内容是存储在- -个零符数组value[]中的。
- * ●String实现了 Serializable接口:表示字符串是支持序列化的。//IO流在讲
- *        实现了Comparable  接口  ：表示String可以比较大小
+ * ●String实现了 Serializable     接口:表示字符串是支持序列化的。//IO流在讲
+ *        实现了 Comparable(比较器)接口:表示String可以比较大小
  * ●String内部定义了final char[] value  用于存储字符串数据
  * ●String:代表不可变的字符序列。简称:不可变性。
  *  体现: 1.当对字符事重新赋值时，需要重写指定内存区域赋值，不能使用原有的value进行赋值。
