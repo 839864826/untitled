@@ -41,8 +41,26 @@ public class 内部类 {//一个Java文件只有主类可以用public修饰   �
 
         WW ww=new WW();
         ww.ZZ();
+
+
+        AA.CC a=new AA.CC();
+
+
     }
 }
+class AA{
+    private AA(){
+
+    }
+    public void ss(){}
+    public static class CC{
+        public void dd(){
+
+        }
+    }
+}
+
+
  class WW{
 
     String name="WW名字";

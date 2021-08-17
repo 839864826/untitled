@@ -1,4 +1,4 @@
-package JavaN;
+package JavaN.Java8;
 
 /**
  *  *       3.1 JDK7及以前:只能定义全局常量和抽象方法  interface
@@ -12,7 +12,7 @@ package JavaN;
  *
  *
  */
-public interface Java8 {
+public interface Java8_default {
     public static void method1(){//使用方式和工具类一样
         System.out.println("定义静态方法");
     }
@@ -25,16 +25,16 @@ public interface Java8 {
         System.out.println("定义/默认方法03");
     }
 }
-class JK implements Java8{
+class JK implements Java8_default{
 
 }
 class defaults{
     public static void main(String[] args) {
         //详情  见接口的 interfaceTest
-        Java8 jk=new JK();
+        Java8_default jk=new JK();
 
         //知识点1:接口中定义的静态方法，只能通过接口来调用。
-        Java8.method1();
+        Java8_default.method1();
 
         //知识点2:通过实现类的对象，可以调用接口中的默认方法。
         //如果实现类重写了接口中的默认方法，调用时，仍然调用的是重写的方法

@@ -10,7 +10,25 @@ package base.常用类;
  */
 public class StringBufferBuilderTest {
     public static void main(String[] args) {
-        执行时间();
+        String str = null;
+        StringBuffer sb = new StringBuffer();
+        /**
+         *         int c = count;
+         *         ensureCapacityInternal(c + 4);
+         *         final char[] value = this.value;
+         *         value[c++] = 'n';
+         *         value[c++] = 'u';
+         *         value[c++] = 'l';
+         *         value[c++] = 'l';
+         *         count = c;
+         *         return this;
+         */
+        sb.append(str);
+        System.out.println(sb.length());
+        System.out.println(sb);
+
+
+        StringBuffer sb1 = new StringBuffer(str);//异常java.lang.NullPointerException
     }
 
     private static void 执行时间() {
