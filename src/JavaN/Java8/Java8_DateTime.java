@@ -16,7 +16,7 @@ import java.util.GregorianCalendar;
  */
 public class Java8_DateTime {
     public static void main(String[] args) {
-        DateTimeFormatter格式转换();
+        SimpleDateFormatDemo();
     }
 
     private static void DateTimeFormatter格式转换() {
@@ -136,7 +136,7 @@ public class Java8_DateTime {
         Date date = new Date();//创建一个当前电脑的时间的对象
 //        System.out.println(date.toString());
         String format= sdf.format(date);//格式化
-        System.out.println(format);//21-8-17 上午10:44
+        System.out.println(format);//
 
         String str = "2015-05-25";
 //        str="21-8-17 上午10:44";
