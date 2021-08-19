@@ -1,6 +1,5 @@
 package base;
 
-
 import java.lang.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +38,7 @@ import static java.lang.annotation.ElementType.*;
  * @param对方法中某参数的说明，如果没有参数就不能写
  * @return 对方法返回值的说明，如果方法的返回值类型是void就不能写
  * @exception对方法可能抛出的异常进行说明，如果方法没有用throws显式抛出的异常就不能写
+ *
  * 其中
  * @param @return 和@exception 这三个标记都是只用于方法的。
  * @param的格式要求: @param 形参名形参类型形参说明
@@ -108,18 +108,9 @@ class b extends Aa implements a{
 
     }
 }
-/**
- * 3.如何自定义注解:参照@SuppressWarnings定义
- * *①注解声明为: @interface
- * *②内部定义成员，通常使用value表示
- * *③可以指定成员的默认值，使用default定义
- * *④如果自定义注解没有成员，表明是一个标识作用。
- *
- *如果注解有成员，在使用注解时，需要指明成员的值。
- * 自定义注解必须配上注解的信息处理流程(使用反射)才有意义。
- * 自定义注解通过都会指明两个元注解: Retention、 Target
- *
- * 4. jdk提供的4种元注解
+
+ /**
+  * 4. jdk提供的4种元注解
  * |元注解: 对现有的注解进行解释说明的注解
  * Retention:指定所修饰的Annotation的生命周期: SOURCE\CLASS (默认行为) \RUNTIME
  * 只有声明为RUNTIME生命周期的注解，力 能通过反射获取。
@@ -133,10 +124,21 @@ class b extends Aa implements a{
 @Repeatable(重复自定义注解.class)//让注解可以写多个 jdk8 新增
 @Target(value={TYPE_USE,TYPE_PARAMETER,CONSTRUCTOR, FIELD, LOCAL_VARIABLE, METHOD, PACKAGE, PARAMETER, TYPE})//指明这个注解可以修饰神魔
 //   TYPE_USE           TYPE_PARAMETER   可以修饰泛型
-@Retention(RetentionPolicy.CLASS)//默认行为  不写也行   SOURCE
+@Retention(RetentionPolicy.CLASS)//默认行为  不写也行   保留在字节码文件中
+//@Retention(RetentionPolicy.SOURCE)//不保留在字节码文件中
 //@Retention(RetentionPolicy.RUNTIME)//只有声明为RUNTIME生命周期的注解，才能通过反射获取。
 @interface 自定义注解{//之后反射在讲真正用处
-
+     /**
+      * 3.如何自定义注解:参照@SuppressWarnings定义
+      * *①注解声明为: @interface
+      * *②内部定义成员，通常使用value表示
+      * *③可以指定成员的默认值，使用default定义
+      * *④如果自定义注解没有成员，表明是一个标识作用。
+      *
+      * 如果注解有成员，在使用注解时，需要指明成员的值。
+      * 自定义注解必须配上注解的信息处理流程(使用反射)才有意义。
+      * 自定义注解通过都会指明两个元注解: Retention、 Target
+      */
     String value();
     String value1()default "hello";//默认hello
 }

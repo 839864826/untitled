@@ -41,17 +41,17 @@ public class 枚举enum {
         Season1[] values = Season1.values();
         for (int i = 0; i < values.length; i++) {
             System.out.print(values[i]+"     ");
-        }
+        }//SPRING     SUMMER     AUTUMN     WINTER
         System.out.println();
         Thread.State[] values1 = Thread.State.values();
         for (int i = 0; i < values1.length; i++) {
             System.out.print(values1[i] + "     ");
-        }
+        }//NEW     RUNNABLE     BLOCKED     WAITING     TIMED_WAITING     TERMINATED
         System.out.println();
         System.out.println("value0f(String objName):返回枚举类中对象名是objName的对象");
         Season1 season11 = Season1.valueOf("WINTER");//找不到会抛异常
-        System.out.println(season11);
-        season11.shows();
+        System.out.println(season11);//WINTER
+        season11.shows();//冬天来了
     }
 
 
@@ -135,10 +135,6 @@ enum Season1 implements info{
             System.out.println("冬天来了");
         }
     };
-    @Override
-    public void show() {
-
-    }//接口的show方法
     @Override
     public void shows() {
         System.out.println(this.name+"来了");

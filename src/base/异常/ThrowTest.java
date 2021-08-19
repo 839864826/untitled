@@ -1,5 +1,9 @@
 package base.异常;
 
+/**
+ * throw:生成-一个异常对象，并抛出。
+ * 使用在方法内部<->自动抛出异常对象
+ */
 public class ThrowTest {
     public static void main(String[] args) {
         Student student = new Student();
