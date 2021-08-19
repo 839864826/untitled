@@ -1,4 +1,4 @@
-package 集合;
+package 集合.CollectionTest;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,7 +15,7 @@ public class ListTest {
         Collections.sort(list, new Comparator<Integer>() {
             @Override
             public int compare(Integer o1, Integer o2) {
-                return o1-o2;
+                return o2-o1;
             }
         });
         System.out.println(list);

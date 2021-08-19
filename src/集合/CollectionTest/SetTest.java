@@ -1,12 +1,17 @@
-package 集合;
+package 集合.CollectionTest;
 
 
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 public class SetTest {
     public static void main(String[] args) {
 
+        Set set=new HashSet();
+        Set set2=new HashSet();
+        Set set3=new HashSet();
+    }
+
+    private static void TreeSetTest() {
         Set<Integer> treeSet=new TreeSet<>();
 
         treeSet.add(5);
