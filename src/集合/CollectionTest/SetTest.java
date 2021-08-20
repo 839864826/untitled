@@ -89,7 +89,9 @@ public class SetTest {
          *                         重写compareTo()方法
          *
          * 3.自然排序中，比较两个对象是否相同的标准为: compareTo() 返回e.不再是equals().
+         *          继承Comparable接口//重写compareTo
          * 4.定制排序中，比较两个对象是否相同的标准为: compare() 返回e.不再是equals().
+         *          Comparator comparator=new Comparator() {}
          */
         Set<Integer> treeSet=new TreeSet<>();
         //二叉树存储   红黑树 特点:有序，查询速度比List快
@@ -100,6 +102,23 @@ public class SetTest {
         treeSet.add(4);
         System.out.println(treeSet);
 
+        Comparable comparable=new Comparable() {
+            @Override
+            public int compareTo(Object o) {
+                return 0;
+            }
+        };
+        //Collection
+        /**
+         * @FunctionalInterface
+         * 1、该注解只能标记在"有且仅有一个抽象方法"的接口上。
+         * 2、JDK8接口中的静态方法和默认方法，都不算是抽象方法。
+         * @FunctionalInterface标记在接口上，
+         *      “函数式接口”是指仅仅只包含一个抽象方法的接口。
+         * 如果一个接口中包含不止一个抽象方法，
+         *      那么不能使用@FunctionalInterface，编译会报错。
+         *
+         */
         Comparator comparator=new Comparator() {
             @Override
             public int compare(Object o1, Object o2) {

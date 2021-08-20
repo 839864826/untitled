@@ -2,7 +2,7 @@ package 集合.CollectionTest;
 
 import java.util.Objects;
 
-public class User implements Comparable {
+public class User implements  Comparable {
     public String name;
     public int age;
 
