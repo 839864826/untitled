@@ -1,5 +1,5 @@
 
-public class Person {
+public class Person implements Comparable{
 
 
     public String a=null;
@@ -17,5 +17,15 @@ public class Person {
 
     public String getPersonName() {
         return this.a;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        if( o instanceof Person){
+            Person person = (Person) o;
+            return this.a.compareTo(person.a);
+        }else {
+            throw  new RuntimeException("类型不匹配");
+        }
     }
 }

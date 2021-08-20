@@ -21,8 +21,32 @@ import java.util.*;
 public  class ListTest {
     public static void main(String[] args) {
 
+        List list = new ArrayList();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.remove(2);//[1, 2]  由于重写了方法  如果不是对象则认为是第几个
+        System.out.println(list);
+        list.remove(new Integer(2));//[1]   想要删除固定的值   要自己装箱
+        System.out.println(list);
+
+
+    }
+
+    private static void List的方法() {
         /**
          * List的方法  不同于Collection
+         *
+         * 总结:常用方法
+         * 增: add(object obj)
+         * 删: remove(int index) / remove(Object obj)
+         * 改: set(int index, object ele)
+         * 查: get(int index)
+         * 插: add(int index, object ele)
+         * 长度: size()
+         * 遍历: ①Iterator迭代器方式
+         *      ②增强for循环
+         *      ③普通的循环
          */
         List list=new ArrayList();
         list.add(5);
@@ -46,9 +70,17 @@ public  class ListTest {
         list.set(0,555);//把角标为0的元素修改成555
         System.out.println(list);//[555, hh, a, hello, 5]
 
-        List list1 = list.subList(1, 5);//返回[1,5)  的list集合
+        List list1 = list.subList(1, 5);//返回[1,5)  的list集合  右边的数大了  不影响最多输出完
         System.out.println(list1);//[hh, a, hello, 5]
-
+        System.out.println("********************遍历*****************************");
+        Iterator iterator = list1.iterator();
+        while (iterator.hasNext()){
+            System.out.print(iterator.next()+"        ");
+        }
+        System.out.println();
+        for (Object o :list1) {
+            System.out.print(o+"        ");
+        }
     }
 
     private static void VectorTest() {
