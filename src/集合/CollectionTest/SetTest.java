@@ -20,9 +20,38 @@ import java.util.*;
 
 public class SetTest {
     public static void main(String[] args) {
-        TreeSetTest();
 
+        HashSet经典问题();
 
+    }
+
+    private static void HashSet经典问题() {
+        HashSet set = new HashSet();
+        User user1 = new User("aa",1001);
+        User user2 = new User("bb",1002);
+        set.add(user1);
+        set.add(user2);
+        System.out.println(set);
+        //[User{name='bb', age=1002}, User{name='aa', age=1001}]
+
+        user1.setName("cc");//把 aa 修改成 cc
+        System.out.println(set);
+        //[User{name='bb', age=1002}, User{name='cc', age=1001}]
+
+        set.remove(user1);//删除 user1  但是删不了
+        // 是因为 他删除的时候先看哈希值，但由于之前的哈希值是根据aa 1001
+        // 计算的大概率不一样，所以发现没有 删除失败
+        System.out.println(set);
+        //[User{name='bb', age=1002}, User{name='cc', age=1001}]
+
+        set.add(new User("cc",1001));//添加的时候是根据哈希值添加的  所以成功
+        System.out.println(set);
+        //[User{name='bb', age=1002}, User{name='cc', age=1001}, User{name='cc', age=1001}]
+
+        set.add(new User("aa",1001));
+        //虽然找到了之前的哈希表的位置 但是equals不相等  所以添加成功
+        System.out.println(set);
+        //[User{name='bb', age=1002}, User{name='cc', age=1001}, User{name='cc', age=1001}, User{name='aa', age=1001}]
     }
 
     private static void LinkedHashSetTest() {
@@ -44,7 +73,7 @@ public class SetTest {
         System.out.println(set);//有序
     }
 
-    private static void HashSetTset() {
+    private static void HashSetTest() {
         /** 添加元素的过程:以HashSet 为例: //JDK8之前 起始大小16  JDK8后  在add之后才有大小
          *二、添加元素的过程:以HashSet为例:
          *      我们向HashSet中添加元素a,首先调用元素a所在类的hashCode()方法，

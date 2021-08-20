@@ -33,6 +33,7 @@ public class CollectionTest {
         for (Object o:coll){//内部调用的也是迭代器
             System.out.println(o);
         }
+        coll.forEach(System.out::println);//同上  也是遍历 JKD8新特性
     }
 
     private static void Iterator迭代器遍历() {
