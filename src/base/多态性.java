@@ -20,7 +20,7 @@ import java.util.Map;
  *
  *  * 5.对象的多态性，只适用于方法，不适用于属性（编译和运行都看左边）
  */
-public class PolymorphismDemo {
+public class 多态性 {
     public static void main(String[] args) {
         Map<String,String> map=new HashMap<>();
         //这就叫多态性声明一个父类  new一个子类
