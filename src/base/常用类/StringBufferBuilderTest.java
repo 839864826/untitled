@@ -24,8 +24,8 @@ public class StringBufferBuilderTest {
          *         return this;
          */
         sb.append(str);
-        System.out.println(sb.length());
-        System.out.println(sb);
+        System.out.println(sb.length());//4
+        System.out.println(sb);//null
 
 
         StringBuffer sb1 = new StringBuffer(str);//异常java.lang.NullPointerException

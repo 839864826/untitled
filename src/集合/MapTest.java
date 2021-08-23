@@ -1,9 +1,11 @@
 package 集合;
 
-import java.util.HashMap;
-import java.util.Hashtable;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import 集合.CollectionTest.User;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.*;
 
 /**
  * ➢Map接口:双列数据，保存具有映射关系“key-value对”的集合JDK1.2
@@ -28,13 +30,148 @@ public class MapTest {
      * -个键值对: key-value 构成了一个Entry对象 。
      * Map中的entry:无序的、不可重复的，使用Set 存储所有的entry
      */
-    public static void main(String[] args) {
-        LinkedHashMap重点();
+    public static void main(String[] args)  {
+        Properties常用来处理配置文件();
 
     }
 
+    private static void Properties常用来处理配置文件() {
+        Properties properties = new Properties();
+        //Hashtable的子类 常用来处理配置文件   key-value都是String
+        FileInputStream fis = null;
+        try {
+            fis = new FileInputStream("jdbc.properties");
+            properties.load(fis);//加载对应的文件
+            //如果有中文  可能有乱码 File->Settings->Editor->File Encodings->
+            //Properties Files (*. properties)
+            //Default encoding for properties files: UTF-8 √ Transparent native -to-asci conversion
+            //要勾上  这个时专门搞properties配置文件的  而且要删了重新搞  否则他之前加载过
+            String name = properties.getProperty("name");
+            String age = properties.getProperty("age");
+            System.out.println(name);
+            System.out.println(age);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                fis.close();//关闭流
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private static void TreeMapTest() {
+        /**
+         * TreeMap
+         * 向TreeMap中添加key-value,要求key必须是由同一个类创建的对象
+         * 因为要按照key进行排序:自然排序、
+         */
+        Comparator comparator=new Comparator() {
+            @Override
+            public int compare(Object o1, Object o2) {
+                if(o1 instanceof User && o2 instanceof User){
+                    User u1 = (User)o1;
+                    User u2 = (User)o2;
+                    return Integer.compare(u1.getAge(), u2.getAge());
+                }else {
+                    throw new RuntimeException("类型不一样");
+                }
+            }
+        };//定制排序
+        TreeMap map = new TreeMap(comparator);
+        User user1 = new User("aa",1005);
+        User user2 = new User("bb",1003);
+        User user3 = new User("dd",1008);
+        User user4 = new User("dd",1002);
+        map.put(user1,99);
+        map.put(user2,23);
+        map.put(user3,786);
+        map.put(user4,95679);
+
+
+        Set entrySet = map.entrySet();
+        Iterator iterator = entrySet.iterator();
+        while (iterator.hasNext()){
+            Object next = iterator.next();
+            Map.Entry entry = (Map.Entry) next;
+            System.out.println(entry.getKey() + "----->" + entry.getValue());
+        } //map最优遍历方法
+    }
+
+    private static void Map的遍历() {
+        Map map = new HashMap();
+
+        map.put(1,"AA");
+        map.put(2,"bb");
+        map.put("CC",3);
+        map.put(2,"BB");//2 这个key相同  把新的value修改成新的
+        System.out.println(map);//{CC=3, 1=AA, 2=BB}
+
+        System.out.println("******************把Map的Key-value提取出来*****************************");
+        Set set = map.keySet();//把Map的key转换成Set
+        System.out.println(set);//[CC, 1, 2]
+        Collection values = map.values();//把Map的value转换成Collection集合
+        System.out.println(values);//[3, AA, BB]
+
+        Set entrySet = map.entrySet();//返回的类型  Set<Map.Entry<K, V>>
+        System.out.println(entrySet);//[CC=3, 1=AA, 2=BB]
+        Iterator iterator = entrySet.iterator();
+        while (iterator.hasNext()){
+            Object obj = iterator.next();
+            Map.Entry entry = (Map.Entry) obj;//Map.Entry 内部接口
+            System.out.println(entry.getKey()+"\t"+entry.getValue());//内部接口的方法（）
+        } //这种遍历方式 速度快 效率高
+    }
+
+    private static void Map的普通方法2() {
+        Map map = new HashMap();
+
+        map.put(1,"AA");
+        map.put(2,"bb");
+        map.put("CC",3);
+        map.put(2,"BB");//2 这个key相同  把新的value修改成新的
+        System.out.println(map);//{CC=3, 1=AA, 2=BB}
+
+        System.out.println(map.get(2));//BB  根据key  返回对应的value
+
+        System.out.println("*********是否包含指定的Key或Value*******************************");
+        System.out.println(map.containsKey(3));//false
+        System.out.println(map.containsValue(3));//true
+        System.out.println(map.equals(map));//true  判断map是否相等
+        System.out.println(map.isEmpty());//false 判断map是否为空
+    }
+
+    private static void Map的普通方法() {
+        Map map = new HashMap();
+
+        map.put(1,"AA");
+        map.put(2,"bb");
+        map.put("CC",3);
+        map.put(2,"BB");//2 这个key相同  把新的value修改成新的
+        System.out.println(map);//{CC=3, 1=AA, 2=BB}
+
+        Map map1 = new HashMap();
+        map1.put("dd",8);
+        map1.put("90",56);
+
+        map.putAll(map1);//合集  把map1的Map全添加到map里
+        System.out.println(map);//{CC=3, dd=8, 1=AA, 2=BB, 90=56}
+
+        System.out.println("***********remove**删除*************************");
+        Object value = map.remove("dd");//删除key为dd的key  并返回value的值
+        System.out.println(value);//8   没有返回null
+        System.out.println(map);//{CC=3, 1=AA, 2=BB, 90=56}
+        System.out.println("***********clear**清空*************************");
+        map.clear();//清空map
+        System.out.println(map.size());//0   获取map的对数
+        System.out.println(map);//{}
+    }
+
     private static void LinkedHashMap重点() {
-        Map map = new LinkedHashMap();//LinkedHashMap中的内部类: Entry数组
+        LinkedHashMap map = new LinkedHashMap();//LinkedHashMap中的内部类: Entry数组
         /*
         重写了new Node数组 把node数组改了 弄成了双线链表
             static class Entry<K,V> extends HashMap.Node<K,V> {
@@ -48,7 +185,8 @@ public class MapTest {
         map.put(7864,"wdgfhaws");
         map.put(5434531,"wdartryws");
         map.put(52.31341,"gdfg");
-        System.out.println(map);
+        System.out.println(map);//可以i根据添加的顺序  遍历
+        //{541=wdaws, 7864=wdgfhaws, 5434531=wdartryws, 52.31341=gdfg}
     }
 
     private static void HashMap的底层实现原理() {
@@ -59,7 +197,7 @@ public class MapTest {
          * 数组+链表+红黑树(jdk 8)
          * //当某一个数组索引位置上的元素以链表形式存储的个数>8 && 且当前数组的长度> 64时，
          *      底层在put之后创建了长度为16的一位数组Node[] table
-         *
+         * //红黑树  排序二叉树
          * 三、HashMap的底层实现原理?以jdk7为例说明:
          *  HashMap map = new HashMap():
          *  在实例化以后，底层创建了长度是16的一维数组Entry[] table.

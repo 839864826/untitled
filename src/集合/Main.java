@@ -20,6 +20,7 @@ package 集合;
  * 关联数组。
  */
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
