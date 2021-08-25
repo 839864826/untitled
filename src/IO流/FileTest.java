@@ -5,7 +5,6 @@ package IO流;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -22,8 +21,8 @@ import java.util.Date;
  *
  */
 public class FileTest {
-    public static void main(String[] args) {
-        test5();
+    public static void main(String[] args) throws IOException {
+        创建硬盘中对应的文件目录();
     }
 
 
@@ -132,7 +131,7 @@ public class FileTest {
     }
 
 
-    public static void test5(){
+    public static void 文件状态判断(){
         /**
          * public boolean isDirectory()：判断是否是文件目录
          * public boolean isFile() ：判断是否是文件
@@ -141,22 +140,22 @@ public class FileTest {
          * public boolean canWrite() ：判断是否可写
          * public boolean isHidden() ：判断是否隐藏
          *
+         * 默认为false
          *
          */
         File file1 = new File("hello.txt");
 //        file1 = new File("hello1.txt");
 
-        System.out.println(file1.isDirectory());
-        System.out.println(file1.isFile());
-        System.out.println(file1.exists());
-        System.out.println(file1.canRead());
-        System.out.println(file1.canWrite());
-        System.out.println(file1.isHidden());
+        System.out.println("是否是文件目录"+file1.isDirectory());
+        System.out.println("是否是文件"+file1.isFile());
+        System.out.println("是否存在"+file1.exists());
+        System.out.println("是否可读"+file1.canRead());
+        System.out.println("是否可写"+file1.canWrite());
+        System.out.println("是否隐藏"+file1.isHidden());
 
         System.out.println();
 
-        File file2 = new File("d:\\io");
-        file2 = new File("d:\\io1");
+        File file2 = new File("E:\\xunlian\\untitled");
         System.out.println(file2.isDirectory());
         System.out.println(file2.isFile());
         System.out.println(file2.exists());
@@ -165,40 +164,43 @@ public class FileTest {
         System.out.println(file2.isHidden());
 
     }
-    /*
-    创建硬盘中对应的文件或文件目录
-public boolean createNewFile() ：创建文件。若文件存在，则不创建，返回false
-public boolean mkdir() ：创建文件目录。如果此文件目录存在，就不创建了。如果此文件目录的上层目录不存在，也不创建。
-public boolean mkdirs() ：创建文件目录。如果此文件目录存在，就不创建了。如果上层文件目录不存在，一并创建
 
-    删除磁盘中的文件或文件目录
-public boolean delete()：删除文件或者文件夹
-    删除注意事项：Java中的删除不走回收站。
-
-     */
-    public static void test6() throws IOException {
+    public static void 创建硬盘中对应的文件() throws IOException {
+        /**
+         *     创建硬盘中对应的文件或文件目录
+         * public boolean createNewFile() ：创建文件。若文件存在，则不创建，返回false
+         * public boolean mkdir() ：创建文件目录。如果此文件目录存在，就不创建了。如果此文件目录的上层目录不存在，也不创建。
+         * public boolean mkdirs() ：创建文件目录。如果此文件目录存在，就不创建了。如果上层文件目录不存在，一并创建
+         *
+         *     删除磁盘中的文件或文件目录
+         * public boolean delete()：删除文件或者文件夹
+         *     删除注意事项：Java中的删除不走回收站。
+         */
         File file1 = new File("hi.txt");
         if(!file1.exists()){
             //文件的创建
-            file1.createNewFile();
+            file1.createNewFile();//创建file1文件
             System.out.println("创建成功");
         }else{//文件存在
-            file1.delete();
+            file1.delete();//删除file1文件
             System.out.println("删除成功");
         }
-
-
     }
-    public static void test7(){
+    public static void 创建硬盘中对应的文件目录(){
+        /**
+         * public boolean mkdir() ：创建文件目录。如果此文件目录存在，就不创建了。如果此文件目录的上层目录不存在，也不创建。
+         * public boolean mkdirs() ：创建文件目录。如果此文件目录存在，就不创建了。如果上层文件目录不存在，一并创建
+         *
+         */
         //文件目录的创建
-        File file1 = new File("d:\\io\\io1\\io3");
+        File file1 = new File("d:\\file\\file1\\file11");
 
-        boolean mkdir = file1.mkdir();
+        boolean mkdir = file1.mkdir();//只能创建
         if(mkdir){
             System.out.println("创建成功1");
         }
 
-        File file2 = new File("d:\\io\\io1\\io4");
+        File file2 = new File("d:\\file\\file1\\file12");
 
         boolean mkdir1 = file2.mkdirs();
         if(mkdir1){
