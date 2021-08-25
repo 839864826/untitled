@@ -58,6 +58,12 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
+        有限制条件的通配符();
+
+
+    }
+
+    private static void 通配符() {
         /**
          * 通配符 ？
          * 类A是类B的父类，G<A> 和G<B>是没有关系的，二者共同的父类是: G<?>
@@ -74,6 +80,10 @@ public class Main {
 
         System.out.println(list2.get(2));//可以读
 
+
+    }
+
+    private static void 有限制条件的通配符() {
         /**
          * 有限制条件的通配符的使用
          * 假设Object是最大的  即  父 大于 子
@@ -110,8 +120,6 @@ public class Main {
         listSup.add(new Order());
         listSup.add(new Student());
 //        listSup.add(new Object());//报错
-
-
     }
 
     private static void 泛型在继承方面的体现() {
