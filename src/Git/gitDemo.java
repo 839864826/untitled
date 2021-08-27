@@ -25,6 +25,17 @@ package Git;
  *
  */
 public class gitDemo {
+    /**
+     * 1、查看git本地的用户：
+     * git config user.name
+     * 2、查看git本地邮箱：
+     * git config user.email
+     * 3、修改git 本地用户：
+     *  git config --global user.name “用户名”
+     * 4、更换新的git用户邮箱：
+     *   git config --global user.email “邮箱地址”
+     * @param args
+     */
     public static void main(String[] args) {
         /**
          * 创建一个本地的git库
