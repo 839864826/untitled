@@ -21,8 +21,7 @@ package base.常用类;
  * String toUppTCase():使用默认语言环境，将String 中的所有字符转换为大写
  * String trim():返回字符串的副本，忽略前导空白和尾部空白
  * boolean equals(Object obj):比较字符串的内容是否相同
- * boolean equalsIgnoreCase(String anotherString): ljequals方法类似， 忽略大
- * 小写
+ * boolean equalsIgnoreCase(String anotherString): equals方法类似， 忽略大小写
  * String concat(String str):将指定字符串连接到此字符串的结尾。等价 于用“+”
  * int compare To(String anotherString):比较两个字符串的大小|
  * String substring(int beginIndex): 返回一个新的字符串，它是此字符串的从
