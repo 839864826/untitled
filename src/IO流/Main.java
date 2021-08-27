@@ -24,6 +24,9 @@ import java.util.Arrays;
  * 1. Java的I0流共涉及40多个类，实际上非常规则，都是从如下4个
  *    抽象基类派生的。
  * 2.由这四个类派生出来的子类名称都是以其父类名作为子类名后缀。
+ * 结论:
+ * 1.对于文本文件(. txt,.java,.c,.cpp),使用字符流处理
+ * 2.对于非文本文件(.jpg,.mp3, .mp4, .avi, .doc,.ppt,...)，使用字节流处理
  */
 public class Main {
     public static void main(String[] args) {
