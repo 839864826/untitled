@@ -76,7 +76,7 @@ public class Buffered缓冲流 {
 
             //造缓冲流
             bis = new BufferedInputStream(fI);//this(in, DEFAULT_BUFFER_SIZE);DEFAULT_BUFFER_SIZE=8192
-//            bos = new BufferedOutputStream(fO);//this(out, 8192);
+            bos = new BufferedOutputStream(fO);//this(out, 8192);
 
 
             byte[] bytes = new byte[sd];//
