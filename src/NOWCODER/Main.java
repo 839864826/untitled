@@ -7,22 +7,63 @@ import java.util.Scanner;
 
 public class Main {
 
+    private static List<Integer> list = new ArrayList<>();
     public static void main(String[] args) {
 
-        partition("sss");
-
-
-
-
-
-
-
-
-        int[][] graph ={{2,4}, {2},{0,1},{4},{3,0}};
-        int[][] graph1 ={{1,2,3,4}, {0,3},{0},{0,1},{0}};
-//        System.out.println(qqqqqq(graph1));
+        addNum(6);
+        addNum(10);
+        addNum(2);
+        addNum(6);
+        addNum(5);
+        addNum(0);
+        addNum(6);
+        addNum(3);
+        addNum(1);
+        addNum(0);
+        addNum(0);
     }
 
+    private static void addNum(int num) {
+        if(list.size()==0){list.add(num);return;}
+        int q=0,h=list.size()-1,z=0;
+        if(list.get(list.size()-1)<num){
+            list.add(num);
+            System.out.println(list);
+            return;
+        }
+        do{
+            z=q+(h-q)/2;
+            if(list.get(z)>num){
+                h=z-1;
+            }else if(list.get(z)<num){
+                q=z+1;
+            }else{
+                list.add(z,num);
+                return;
+            }
+        }while(q<=h);
+//        if(list.get(q)<num){
+//            list.add(q+1,num);
+//        }else {
+//            list.add(q,num);
+//        }
+
+        list.add(q,num);
+
+
+        System.out.println(q +"  "+ h);
+        System.out.println(list);
+    }
+
+    private static double findMedian() {
+        int h=list.size(),q=h-1;
+        q/=2;h/=2;
+        if(q==h){
+            return (double) list.get(q);
+        }else{
+            return ((double)list.get(q)+(double)list.get(h))/2;
+        }
+    }
     private static List<List<String>> partition(String s) {
         List<List<String>> list= new ArrayList<List<String>>();
         List<String> list1= new ArrayList<>();

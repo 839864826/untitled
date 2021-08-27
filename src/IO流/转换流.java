@@ -1,5 +1,8 @@
 package IO流;
 
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+
 /**
  * 处理流之二：转换流的使用
  * 1.转换流：属于字符流
@@ -22,8 +25,13 @@ package IO流;
  *  UTF-8：变长的编码方式，可用1-4个字节来表示一个字符。
  *
  *
- * @author shkstart
- * @create 2019 下午 4:25
  */
 public class 转换流 {
+    //E:\\xunlian\\untitled\\File\\hello.txt
+    public static void main(String[] args) {
+        FileInputStream fis = new FileInputStream("File\\hello.txt");
+//        InputStreamReader isr = new InputStreamReader(fis);
+        //
+        InputStreamReader isr8 = new InputStreamReader(fis,"UTF-8");
+    }
 }
