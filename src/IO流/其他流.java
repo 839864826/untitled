@@ -50,6 +50,7 @@ public class 其他流 {
             dis = new DataInputStream(new FileInputStream("File\\cin.txt"));
             dos.writeUTF("张蛟龙");
 //            dos.flush();//刷新操作，将内存中的数据写入文件
+
             dos.writeInt(23);
 //            dos.flush();
             dos.writeBoolean(true);
