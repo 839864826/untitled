@@ -1,7 +1,11 @@
 package IO流;
 
 import java.io.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 /**
  * 其他流的使用
@@ -11,9 +15,22 @@ import java.util.Scanner;
  */
 public class 其他流 {
     public static void main(String[] args) {
+//
+//        String str = "ad";
+//        str.chars().filter(x->x>3).forEach(x-> System.out.println(x));
+//
+//        Arrays.asList(4,5,9,10).parallelStream()
+//                .filter(m->{
+//                    System.out.println(m);
+//                    return (m>1);
+//                }).map(m -> m+1)
+//                .collect(Collectors.groupingBy(x ->x%10))
+//                .forEach((x,y)-> System.out.println(y));
+//
 
-        数据流();
-
+        Map<Integer,Integer> map = new HashMap<>();
+        map.put(5,6);
+        System.out.println(map.get(4));
 
     }
 
@@ -60,7 +77,7 @@ public class 其他流 {
                 e.printStackTrace();
             }
         }
-    }
+    } //可以保存类型
 
     private static void 打印流() {
         /**
