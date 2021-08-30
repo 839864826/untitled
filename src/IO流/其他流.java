@@ -1,6 +1,7 @@
 package IO流;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,9 +16,78 @@ import java.util.stream.Collectors;
  */
 public class 其他流 {
     public static void main(String[] args) {
-        对象流序列化();
+        随机流();
+    }
+
+    private static void 随机流() {
+        /**
+         * RandomAccessFile的使用
+         * 1.RandomAccessFile直接继承于java.lang.Object类，实现了DataInput和DataOutput接口
+         * 2.RandomAccessFile既可以作为一个输入流，又可以作为一个输出流
+         *
+         * 3.如果RandomAccessFile作为输出流时，写出到的文件如果不存在，则在执行过程中自动创建。
+         *   如果写出到的文件存在，则会对原有文件内容进行覆盖。（默认情况下，从头覆盖）
+         *
+         * 4. 可以通过相关的操作，实现RandomAccessFile“插入”数据的效果
+         *
+         * ●创建RandomAccessFile类实例需要指定一个mode参数，该参数指
+         * 定RandomAccessFile的访问模式:
+         * ➢r:以只读方式打开
+         * ➢rw:打开以便读取和写入
+         * ➢rwd:打开以便读取和写入;同步文件内容的更新
+         * ➢rws:打开以便读取和写入;同步文件内容和元数据的更新
+         * ●如果模式为只读r。则不会创建文件，而是会去读取一一个已经存在的文件,
+         * 如果读取的文件不存在则会出现异常。如果模式为rw读写。如果文件不
+         * 存在则会去创建文件，如果存在则不会创建。
+         *
+         */
+        /**
+         * ●RandomAccessFile类支持“随机访问”的方式，程序可以直接跳到文件的任意
+         * 地方来读、写文件
+         * ➢支持只访问文件的部分内容
+         * ➢可以向已存在的文件后追加内容
+         * ●RandomAccessFile对象包含-一个记录指针，用以标示当前读写处的位置。
+         * RandomAccessFile类对象可以自由移动记录指针:
+         * ➢long getFilePointer():获取文件记录指针的当前位置
+         * ➢void seek(jong pos):将文件记录指针定位到pos位置
+         */
+        RandomAccessFile raf0 = null;
+        RandomAccessFile raf1 = null;
+        try {
+            raf0 = new RandomAccessFile(new File("File\\cout.txt"),"r");
+            raf1 = new RandomAccessFile(new File("File\\cin.txt"),"rw");
+            byte[] buffer = new byte[5];
+//            StringBuilder sb = new StringBuilder();// 由于字节与String的字符冲突  中文等  会出现乱码
+            ByteArrayOutputStream sb = new ByteArrayOutputStream();//这个不会出现乱码
+            int len;
+            raf1.seek(5);//指针位置调到5  开始覆盖或读取   从0开始
+            while((len = raf1.read(buffer)) != -1){
+//               sb.append(new String(buffer,0,len));
+                sb.write(buffer,0,len);
+            }
+            System.out.println(sb);
+            raf1.seek(5);//指针位置调到5  开始覆盖或读取   从0开始
+            raf1.write("666".getBytes());
+//            raf1.write(sb.toString().getBytes());//对原有文件进行覆盖
+            raf1.write(sb.toByteArray());//对原有文件进行覆盖
+
+            //原有文件存在   不会删除原有文件  只是从指针位置（默认从0开始）开始覆盖
 
 
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                raf0.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                raf1.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     private static void 对象流序列化() {
