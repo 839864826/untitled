@@ -15,23 +15,69 @@ import java.util.stream.Collectors;
  */
 public class 其他流 {
     public static void main(String[] args) {
-//
-//        String str = "ad";
-//        str.chars().filter(x->x>3).forEach(x-> System.out.println(x));
-//
-//        Arrays.asList(4,5,9,10).parallelStream()
-//                .filter(m->{
-//                    System.out.println(m);
-//                    return (m>1);
-//                }).map(m -> m+1)
-//                .collect(Collectors.groupingBy(x ->x%10))
-//                .forEach((x,y)-> System.out.println(y));
-//
+        对象流序列化();
 
-        Map<Integer,Integer> map = new HashMap<>();
-        map.put(5,6);
-        System.out.println(map.get(4));
 
+    }
+
+    private static void 对象流序列化() {
+        /**
+         * 处理流:对象流
+         * ●ObjectInputStream和ObjectOutputSteam
+         * ➢用于存储和读取基木数据类型数据或对象的处理流。它的强大之处就是可
+         *   以把Java中的对象写入到数据源中，也能把对象从数据源中还原回来。
+         * ●序列化: 用ObjectOutputStream类 保存基本类型数据或对象的机制
+         * ●反序列化:用ObjectInputStream类 读取基本类型数据或对象的机制
+         * ●ObjectOutputStream和ObjectInputStream不能序
+         *  列化static和transient修饰的成员变量
+         *
+         * ●对象序列化机制允许把内存中的Java对象转换成平台无关的二进制流，从
+         *  而允许把这种二进制流持久地保存在磁盘上，或通过网络将这种二进制流传
+         *  输到另一个网络节点。
+         *  当其它程序获取了这种二进制流，就可以恢复成原来的Java对象
+         * ●序列化的好处在于可将任何实现了Serializable接口的对象转化为字节数据,
+         *  使其在保存和传输时可被还原
+         * ●序列化是RMI ( Remote Method Invoke -远程方法调用)过程的参数和返
+         *  回值都必须实现的机制，而RMI是JavaEE的基础。因此序列化机制是
+         *  JavaEE平台的基础
+         * ●"如果需要让某个对象支持序列化机制"，则必须让对象所属的类及其属性是可
+         *  序列化的，为了让某个类是可序列化的，该类必须实现如下两个接口之一。
+         *  否则，会抛出NotSerializableException异常
+         * ➢Serializable
+         * ➢Externalizable
+         *
+         */
+
+        ObjectOutputStream oos = null;//写
+        ObjectInputStream ois = null;//读
+        try {
+            oos = new ObjectOutputStream(new FileOutputStream("File\\hello1.txt"));
+            ois = new ObjectInputStream(new FileInputStream("File\\hello1.txt"));
+
+            oos.writeObject("我爱中国");
+            oos.flush();
+            oos.writeObject(new User(1,22,"张蛟龙"));
+            oos.flush();
+
+
+            System.out.println(ois.readObject());
+
+            System.out.println(ois.readObject());
+
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                oos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                ois.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     private static void 数据流() {
